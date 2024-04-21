@@ -3,6 +3,7 @@ extends componentBase
 var lowColor: Color = Color(0.5, 0.5, 0.5)
 var highColor: Color = Color(0.8, 0.1, 0.1)
 var sprite: Sprite2D
+var state: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,7 +23,7 @@ func _process(delta) -> void:
 	if inputs[0].connectedOutput == null:
 		state = false
 	else:
-		state = inputs[0].connectedOutput.get_parent().state
+		state = inputs[0].connectedOutput.state
 
 	if state:
 		sprite.modulate = highColor

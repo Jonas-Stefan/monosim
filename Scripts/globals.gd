@@ -1,7 +1,10 @@
 extends Node
 class_name globals
 
+enum tools {MOVE, DELETE}
+
 static var selectedOutput: Node2D = null
+static var tool: tools = tools.MOVE
 static var gridSize: int  = 10
 
 static func snapToGrid(pos: Vector2) -> Vector2:

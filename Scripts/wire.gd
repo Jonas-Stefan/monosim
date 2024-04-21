@@ -4,6 +4,9 @@ var wireAreas: Array[Area2D] = []
 var areaWidth: int = 8
 
 func _ready() -> void:
+	#add two first points
+	add_wire_point(Vector2(0, 0))
+	add_wire_point(Vector2(0, 0))
 	return
 
 #takes a point relative to the origin of the wire and adds it to the wire
@@ -54,7 +57,6 @@ func get_wire_point_count() -> int:
 	return get_point_count()
 
 func delete() -> void:
-	print("deleting wire")
 	var index: int = -1
 	var parent: Node2D = get_parent().get_parent()
 
@@ -97,11 +99,10 @@ func _on_wire_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int,
 		params.collide_with_areas = true
 		params.collide_with_bodies = false
 		for dict in space.intersect_point(params):
-			if dict["collider"].get_parent().name.substr(0, 5) == "input":
+			if dict["collider"].get_parent().name.substr(0, 5) == "input" or dict["collider"].get_parent().name.substr(0, 6) == "output":
 				return
 
 		#actually create the new wire
-		print("creating new wire")
 		var newWire: Line2D = load("res://Scenes/wire.tscn").instantiate()
 		#add the wire to the scene, assuming the path is 'output' - 'wires' - 'wire'
 		get_parent().get_parent().wires.append(newWire)
@@ -111,12 +112,13 @@ func _on_wire_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int,
 		#add a final point to the wire
 		#distance between last point and mouse
 		var distance: Vector2 = get_global_mouse_position() - get_wire_point_global_position(wireIndex)
+		var length: int = distance.length() - int(distance.length()) % 10
 		#angle between last point and next point in the 'parent wire'
 		var lastPoint: Vector2 = newWire.get_wire_point_position(wireIndex)
 		var nextPoint: Vector2 = get_wire_point_position(wireIndex + 1)
 		var angle: float = atan2(nextPoint.y - lastPoint.y, nextPoint.x - lastPoint.x)
 		#add the point
-		newWire.add_wire_point(get_wire_point_position(wireIndex) + Vector2(cos(angle) * distance.length(), sin(angle) * distance.length()))
+		newWire.add_wire_point(get_wire_point_position(wireIndex) + Vector2(cos(angle) * length, sin(angle) * length))
 
 		#newWire.add_wire_point(get_global_mouse_position() - global_position)
 		globals.selectedOutput = get_parent().get_parent()

@@ -1,7 +1,7 @@
 extends Node2D
 class_name componentBase
 
-var state: bool = false
+#var state: bool = false
 var selected: bool = false
 var dragOffset: Vector2
 var outputs: Array[Node2D]
@@ -50,8 +50,34 @@ func _process(_delta) -> void:
 	
 	return
 
-
 func _on_drag_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
+	if globals.tool == globals.tools.MOVE:
+		handle_move_tool(event)
+	elif globals.tool == globals.tools.DELETE:
+		if event.is_action_pressed("lClick"):
+			delete()
+	return
+
+#handle the delete tool and generally deleting the component
+func delete() -> void:
+	var root: Node2D = get_tree().get_root().get_node("root")
+	for i in range(root.gates.size()):
+		if root.gates[i] == self:
+			root.gates.remove_at(i)
+			break
+
+	for output in outputs:
+		for wire in output.wires:
+			wire.delete()
+	
+	for input in inputs:
+		if input.connectedOutput != null:
+			input.connectedWire.delete()
+	
+	queue_free()
+
+#handles the move tool
+func handle_move_tool(event: InputEvent) -> void:
 	if event.is_action_pressed("lClick"):
 		selected = true
 		dragOffset = position - get_global_mouse_position()
@@ -72,9 +98,5 @@ func _on_drag_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int)
 		#snap the input lines to the grid
 		for input in inputs:
 			if input.connectedOutput != null:
-				for i in range(input.connectedOutput.connectedInputs.size()):
-					if input.connectedOutput.connectedInputs[i].get_parent() == self:
-						var wires: Array[Line2D] = input.connectedOutput.wires
-						wires[i].set_wire_point_position(wires[i].get_wire_point_count() - 1, input.global_position - input.connectedOutput.global_position)
-	
-	return
+				var wire: Line2D = input.connectedWire
+				wire.set_wire_point_position(wire.get_wire_point_count() - 1, input.global_position - input.connectedOutput.global_position)

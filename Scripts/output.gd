@@ -1,5 +1,6 @@
 extends Node2D
 
+var state: bool = false
 var connectedInputs: Array[Node2D]
 var lowColor: Color = Color(0.5, 0.5, 0.5)
 var highColor: Color = Color(0.8, 0.1, 0.1)
@@ -11,7 +12,7 @@ func _ready():
 
 func _process(_delta) -> void:
 	for wire in wires:
-		if get_parent().state == true:
+		if state == true:
 			wire.set_default_color(highColor)
 		else:
 			wire.set_default_color(lowColor)
@@ -27,4 +28,3 @@ func _on_input_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int
 		var newWire: Line2D = load("res://Scenes/wire.tscn").instantiate()
 		wires.append(newWire)
 		wiresNode.add_child(newWire)
-	

@@ -32,5 +32,4 @@ func connect_output(wire: Line2D) -> void:
 	connectedWire = wire
 
 	#finish the connection process
-	#await get_tree().create_timer(0.05).timeout #probably a temporary solution
 	globals.selectedOutput = null

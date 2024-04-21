@@ -1,0 +1,113 @@
+[gd_scene load_steps=4 format=3 uid="uid://cld0n4yche0pl"]
+
+[ext_resource type="Theme" uid="uid://drfn2y5u60xn2" path="res://UITheme.tres" id="1_c8xgw"]
+[ext_resource type="Script" path="res://Scripts/componentBtn.gd" id="2_bq4jl"]
+[ext_resource type="Script" path="res://Scripts/toolBtn.gd" id="3_kbmjr"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="topButtons" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="topButtons"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="topButtons"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="topButtons/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="topButtons/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="NOT" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_c8xgw")
+text = "NOT
+"
+script = ExtResource("2_bq4jl")
+
+[node name="AND" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_c8xgw")
+text = "AND
+"
+script = ExtResource("2_bq4jl")
+
+[node name="OR" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_c8xgw")
+text = "OR"
+script = ExtResource("2_bq4jl")
+
+[node name="switch" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_c8xgw")
+text = "switch
+"
+script = ExtResource("2_bq4jl")
+
+[node name="lamp" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_c8xgw")
+text = "lamp"
+script = ExtResource("2_bq4jl")
+
+[node name="toolSelection" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="toolSelection"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="toolSelection/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="move" type="Button" parent="toolSelection/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("1_c8xgw")
+text = "move"
+script = ExtResource("3_kbmjr")
+
+[node name="delete" type="Button" parent="toolSelection/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_c8xgw")
+text = "delete
+"
+script = ExtResource("3_kbmjr")

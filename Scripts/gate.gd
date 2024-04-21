@@ -15,10 +15,10 @@ func calculate() -> bool:
 		if input.connectedOutput == null:
 			return false
 	if type == "AND":
-		return inputs[0].connectedOutput.get_parent().state and inputs[1].connectedOutput.get_parent().state
+		return inputs[0].connectedOutput.state and inputs[1].connectedOutput.state
 	elif type == "OR":
-		return inputs[0].connectedOutput.get_parent().state or inputs[1].connectedOutput.get_parent().state
+		return inputs[0].connectedOutput.state or inputs[1].connectedOutput.state
 	elif type == "NOT":
-		return not inputs[0].connectedOutput.get_parent().state
+		return not inputs[0].connectedOutput.state
 	else:
 		return false
