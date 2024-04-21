@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2504shnbpxp"]
+
+[ext_resource type="Script" path="res://Scripts/switch.gd" id="1_5b5uc"]
+[ext_resource type="Texture2D" uid="uid://cm6pr0epubyad" path="res://Sprites/gate.png" id="2_itr2y"]
+[ext_resource type="PackedScene" uid="uid://c46q0dw0jb7ye" path="res://Scenes/output.tscn" id="3_od8lu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mcq7t"]
+
+[node name="switch" type="Node2D"]
+script = ExtResource("1_5b5uc")
+
+[node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_itr2y")
+
+[node name="output" parent="." instance=ExtResource("3_od8lu")]
+position = Vector2(30, 0)
+
+[node name="inputArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="inputArea"]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_mcq7t")
+
+[connection signal="input_event" from="inputArea" to="." method="_on_input_area_input_event"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://c221ijkxrkbmp"]
+
+[ext_resource type="Script" path="res://Scripts/gate.gd" id="1_v27xy"]
+[ext_resource type="Texture2D" uid="uid://cm6pr0epubyad" path="res://Sprites/gate.png" id="2_lgjwq"]
+[ext_resource type="LabelSettings" uid="uid://bowtv2igofvn7" path="res://Fonts/font.tres" id="3_3fyl2"]
+[ext_resource type="PackedScene" uid="uid://bm66f64gdvxcf" path="res://Scenes/input.tscn" id="4_tu2do"]
+[ext_resource type="PackedScene" uid="uid://c46q0dw0jb7ye" path="res://Scenes/output.tscn" id="5_ahwht"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr37d"]
+
+[node name="AND" type="Node2D"]
+script = ExtResource("1_v27xy")
+type = "AND"
+
+[node name="body" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0.705882, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_lgjwq")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "AND"
+label_settings = ExtResource("3_3fyl2")
+
+[node name="input1" parent="." instance=ExtResource("4_tu2do")]
+position = Vector2(-60, -20)
+
+[node name="input2" parent="." instance=ExtResource("4_tu2do")]
+position = Vector2(-60, 20)
+
+[node name="output" parent="." instance=ExtResource("5_ahwht")]
+position = Vector2(60, 0)
+
+[node name="dragArea" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="dragArea"]
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_lr37d")

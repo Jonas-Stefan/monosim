@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c46q0dw0jb7ye"]
+
+[ext_resource type="Texture2D" uid="uid://bmx4k11xrcdgc" path="res://Sprites/IO.png" id="1_qgth5"]
+[ext_resource type="Script" path="res://Scripts/output.gd" id="1_tv7er"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_skx0h"]
+
+[node name="output" type="Node2D"]
+script = ExtResource("1_tv7er")
+
+[node name="sprite" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_qgth5")
+
+[node name="outputArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="shape" type="CollisionShape2D" parent="outputArea"]
+scale = Vector2(0.8, 0.8)
+shape = SubResource("CircleShape2D_skx0h")
+
+[node name="wires" type="Node2D" parent="."]
+
+[connection signal="input_event" from="outputArea" to="." method="_on_input_area_input_event"]

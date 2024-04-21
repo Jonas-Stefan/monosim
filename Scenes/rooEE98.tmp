@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://ch0ojc88ansrd"]
+
+[ext_resource type="Script" path="res://Scripts/logic.gd" id="1_pfpyv"]
+[ext_resource type="PackedScene" uid="uid://b1ernndl85afu" path="res://BaseComponents/not.tscn" id="2_tgcfb"]
+[ext_resource type="PackedScene" uid="uid://d2wrk4135gfnm" path="res://BaseComponents/or.tscn" id="3_xupb7"]
+[ext_resource type="PackedScene" uid="uid://c221ijkxrkbmp" path="res://BaseComponents/and.tscn" id="4_4bljs"]
+[ext_resource type="PackedScene" uid="uid://nvs1nb4wtsa0" path="res://BaseComponents/lamp.tscn" id="6_11c6k"]
+[ext_resource type="PackedScene" uid="uid://d2504shnbpxp" path="res://BaseComponents/switch.tscn" id="7_gg0c7"]
+
+[node name="root" type="Node2D"]
+script = ExtResource("1_pfpyv")
+
+[node name="cam" type="Camera2D" parent="."]
+
+[node name="gates" type="Node2D" parent="."]
+
+[node name="NOT" parent="gates" instance=ExtResource("2_tgcfb")]
+position = Vector2(-160, 0)
+
+[node name="OR" parent="gates" instance=ExtResource("3_xupb7")]
+position = Vector2(160, 0)
+
+[node name="AND" parent="gates" instance=ExtResource("4_4bljs")]
+
+[node name="switch" parent="." instance=ExtResource("7_gg0c7")]
+position = Vector2(0, -150)
+
+[node name="switch2" parent="." instance=ExtResource("7_gg0c7")]
+position = Vector2(290, 100)
+
+[node name="lamp" parent="." instance=ExtResource("6_11c6k")]
+position = Vector2(-140, -150)
+
+[node name="lamp2" parent="." instance=ExtResource("6_11c6k")]
+position = Vector2(0, 120)
+
+[node name="lamp3" parent="." instance=ExtResource("6_11c6k")]
+position = Vector2(310, -10)
