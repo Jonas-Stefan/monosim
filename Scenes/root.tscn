@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch0ojc88ansrd"]
+[gd_scene load_steps=4 format=3 uid="uid://ch0ojc88ansrd"]
 
 [ext_resource type="Script" path="res://Scripts/logic.gd" id="1_pfpyv"]
+[ext_resource type="Script" path="res://Scripts/cam.gd" id="2_jcwwb"]
 [ext_resource type="PackedScene" uid="uid://cld0n4yche0pl" path="res://Scenes/ui.tscn" id="7_xsrpf"]
 
 [node name="root" type="Node2D"]
 script = ExtResource("1_pfpyv")
 
 [node name="cam" type="Camera2D" parent="."]
+script = ExtResource("2_jcwwb")
 
 [node name="gates" type="Node2D" parent="."]
 

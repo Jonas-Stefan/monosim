@@ -60,29 +60,6 @@ func game_loop() -> void:
 		#wait for the next tick
 		await get_tree().create_timer(1.0 / tps).timeout
 
-# func delete_selection() -> void:
-# 	#I would have to remove the break when implementing multiple selection
-# 	#delete every selected gate
-# 	for i in range(gates.size()):
-# 		if gates[i].selected:
-# 			gates[i].delete()
-# 			gates.remove_at(i)
-# 			break
-	
-# 	#delete every selected I/O pin
-# 	for i in range(pins.size()):
-# 		if pins[i].selected:
-# 			pins[i].delete()
-# 			pins.remove_at(i)
-# 			break
-
-# 	#delete every selected chip
-# 	for i in range(chips.size()):
-# 		if chips[i].selected:
-# 			chips[i].delete()
-# 			chips.remove_at(i)
-# 			break
-
 func visualize_wire(wire: Line2D) -> void:
 	#I couldn't think of a better name for this function, but it shows the next wire piece the user would add when pressing left click
 	if wire.get_wire_point_count() > 0:
@@ -94,13 +71,13 @@ func visualize_wire(wire: Line2D) -> void:
 
 			if abs(delta.x) > abs(delta.y):
 				#draw the wire horizontally
-				wire.set_wire_point_position(wire.get_wire_point_count() - 1, globals.snapToGrid(wire.get_wire_point_position(wire.get_wire_point_count() - 2) + Vector2(delta.x, 0)))
+				wire.set_wire_point_position(wire.get_wire_point_count() - 1, globals.snap_to_grid(wire.get_wire_point_position(wire.get_wire_point_count() - 2) + Vector2(delta.x, 0)))
 			else:
 				#draw the wire vertically
-				wire.set_wire_point_position(wire.get_wire_point_count() - 1, globals.snapToGrid(wire.get_wire_point_position(wire.get_wire_point_count() - 2) + Vector2(0, delta.y)))
+				wire.set_wire_point_position(wire.get_wire_point_count() - 1, globals.snap_to_grid(wire.get_wire_point_position(wire.get_wire_point_count() - 2) + Vector2(0, delta.y)))
 		else:
 			#draw the wire to the mouse position
-			wire.set_wire_point_position(wire.get_wire_point_count() - 1, globals.snapToGrid(get_global_mouse_position() - globals.selectedOutput.get_global_position()))
+			wire.set_wire_point_position(wire.get_wire_point_count() - 1, globals.snap_to_grid(get_global_mouse_position() - globals.selectedOutput.get_global_position()))
 
 func add_wire_point(wire: Line2D) -> void:
 	#detect if the user actually clicked on the output

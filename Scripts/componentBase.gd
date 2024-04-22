@@ -85,8 +85,8 @@ func handle_move_tool(event: InputEvent) -> void:
 		selected = false
 
 		#snap the component to the grid
-		var dSnap: Vector2 = global_position - globals.snapToGrid(global_position)
-		position = globals.snapToGrid(position)
+		var dSnap: Vector2 = global_position - globals.snap_to_grid(global_position)
+		position = globals.snap_to_grid(position)
 
 		#snap the output lines to the grid
 		for output in outputs:
