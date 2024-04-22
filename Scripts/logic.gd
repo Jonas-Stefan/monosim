@@ -42,6 +42,10 @@ func _process(_delta) -> void:
 		#detect if the user wants to add a new point to the line
 		if Input.is_action_just_pressed("lClick"):
 			add_wire_point(wire)
+		
+		if Input.is_action_just_pressed("rClick"):
+			#remove the last point of the wire
+			wire.remove_wire_point(wire.get_wire_point_count() - 1)
 
 		#visualize the wire by updating the last point to the mouse position
 		visualize_wire(wire)

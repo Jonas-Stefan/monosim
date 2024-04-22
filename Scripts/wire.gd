@@ -47,6 +47,22 @@ func set_wire_point_position(index: int, pos: Vector2) -> void:
 	wireAreas[index - 1].get_child(0).shape.size = Vector2(length, areaWidth)
 	return
 
+func remove_wire_point(index: int) -> void:
+	if get_point_count() == 1:
+		globals.selectedOutput = null
+		delete()
+		return
+	
+	#remove the point from the line2d
+	remove_point(index)
+	if index == 0:
+		return
+
+	#remove the area2d
+	wireAreas[index - 1].queue_free()
+	wireAreas.remove_at(index - 1)
+	return
+
 func get_wire_point_position(index: int) -> Vector2:
 	return get_point_position(index)
 
