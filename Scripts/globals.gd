@@ -1,7 +1,7 @@
 extends Node
 class_name globals
 
-enum tools {MOVE, DELETE, CHANGE}
+enum tools {MOVE, DELETE, EDIT}
 
 static var selectedOutput: Node2D = null
 static var tool: tools = tools.MOVE

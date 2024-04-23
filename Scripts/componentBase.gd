@@ -67,7 +67,7 @@ func _on_drag_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int)
 	elif globals.tool == globals.tools.DELETE:
 		if event.is_action_pressed("lClick"):
 			delete()
-	elif globals.tool == globals.tools.CHANGE:
+	elif globals.tool == globals.tools.EDIT:
 		handle_change_tool(event)
 	return
 

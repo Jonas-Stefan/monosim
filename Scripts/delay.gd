@@ -36,3 +36,16 @@ func calculate() -> bool:
 		delayArray.append(inputs[0].connectedOutput.state)
 	
 	return returnState
+
+func _input(event):
+	if globals.tool == globals.tools.EDIT:
+		if selected:
+			if event is InputEventKey and event.is_pressed():
+				if event.get_keycode() >= 48 and event.get_keycode() <= 57:
+					delay = min(int(str(delay) + str(event.get_keycode() - 48)), 1000)
+				elif event.get_keycode() >= 4194438 and event.get_keycode() <= 4194447:
+					delay = int(str(delay) + str(event.get_keycode() - 4194438))
+				elif event.get_keycode() == 4194308:
+					delay = int(str(delay).substr(0, str(delay).length() - 1))
+				elif event.get_keycode() == 4194309:
+					selected = false

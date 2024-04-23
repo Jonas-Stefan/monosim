@@ -93,21 +93,3 @@ func _input(event: InputEvent) -> void:
 		
 		if event.is_action_pressed("rClick"):
 			wire.remove_wire_point(wire.get_wire_point_count() - 1)
-	
-	if globals.tool == globals.tools.CHANGE:
-		if event is InputEventKey and event.is_pressed():
-			if event.get_keycode() >= 48 and event.get_keycode() <= 57:
-				for gate in gates:
-					if gate.name.substr(0, 5) == "delay" and gate.selected:
-						gate.delay = int(str(gate.delay) + str(event.get_keycode() - 48))
-			elif event.get_keycode() >= 4194438 and event.get_keycode() <= 4194447:
-				for gate in gates:
-					if gate.name.substr(0, 5) == "delay" and gate.selected:
-						gate.delay = int(str(gate.delay) + str(event.get_keycode() - 4194438))
-			elif event.get_keycode() == 4194308:
-				for gate in gates:
-					if gate.name.substr(0, 5) == "delay" and gate.selected:
-						gate.delay = int(str(gate.delay).substr(0, str(gate.delay).length() - 1))
-			elif event.get_keycode() == 4194309:
-				for gate in gates:
-					gate.selected = false

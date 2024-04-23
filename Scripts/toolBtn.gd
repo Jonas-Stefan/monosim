@@ -13,6 +13,6 @@ func _on_button_down():
 		globals.tool = globals.tools.MOVE
 	elif self.name == "delete":
 		globals.tool = globals.tools.DELETE
-	elif self.name == "change":
-		globals.tool = globals.tools.CHANGE
+	elif self.name == "edit":
+		globals.tool = globals.tools.EDIT
 	

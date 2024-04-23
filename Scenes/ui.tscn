@@ -7,18 +7,21 @@
 [node name="UI" type="CanvasLayer"]
 
 [node name="topButtons" type="Control" parent="."]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
 
 [node name="ColorRect" type="ColorRect" parent="topButtons"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="topButtons"]
@@ -28,20 +31,24 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="topButtons/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="topButtons/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = 15
 
 [node name="NOT" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "NOT
 "
@@ -49,6 +56,7 @@ script = ExtResource("2_bq4jl")
 
 [node name="AND" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "AND
 "
@@ -56,18 +64,21 @@ script = ExtResource("2_bq4jl")
 
 [node name="OR" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "OR"
 script = ExtResource("2_bq4jl")
 
 [node name="delay" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "delay"
 script = ExtResource("2_bq4jl")
 
 [node name="switch" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "switch
 "
@@ -75,6 +86,7 @@ script = ExtResource("2_bq4jl")
 
 [node name="lamp" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "lamp"
 script = ExtResource("2_bq4jl")
@@ -118,8 +130,8 @@ text = "delete
 "
 script = ExtResource("3_kbmjr")
 
-[node name="change" type="Button" parent="toolSelection/MarginContainer/HBoxContainer"]
+[node name="edit" type="Button" parent="toolSelection/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_c8xgw")
-text = "change"
+text = "edit"
 script = ExtResource("3_kbmjr")
