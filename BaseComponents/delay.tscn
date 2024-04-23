@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bap5xye1chn3c"]
+
+[ext_resource type="Script" path="res://Scripts/delay.gd" id="1_jxksf"]
+[ext_resource type="Texture2D" uid="uid://cm6pr0epubyad" path="res://Sprites/gate.png" id="1_sn0dc"]
+[ext_resource type="LabelSettings" uid="uid://bowtv2igofvn7" path="res://Fonts/nameFont.tres" id="2_0n7qt"]
+[ext_resource type="PackedScene" uid="uid://bm66f64gdvxcf" path="res://Scenes/input.tscn" id="3_61cc8"]
+[ext_resource type="LabelSettings" uid="uid://dy21717wg8iec" path="res://Fonts/smallFont.tres" id="3_xe443"]
+[ext_resource type="PackedScene" uid="uid://c46q0dw0jb7ye" path="res://Scenes/output.tscn" id="4_awbt1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ibxc"]
+
+[node name="delay" type="Node2D"]
+script = ExtResource("1_jxksf")
+
+[node name="body" type="Sprite2D" parent="."]
+modulate = Color(0.745098, 0, 0.745098, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_sn0dc")
+
+[node name="name" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -41.5
+offset_top = -45.0
+offset_right = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "delay"
+label_settings = ExtResource("2_0n7qt")
+
+[node name="delay" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -41.5
+offset_right = 41.5
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1 tick"
+label_settings = ExtResource("3_xe443")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="input" parent="." instance=ExtResource("3_61cc8")]
+position = Vector2(-60, 0)
+
+[node name="output" parent="." instance=ExtResource("4_awbt1")]
+position = Vector2(60, 0)
+
+[node name="dragArea" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="dragArea"]
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_4ibxc")

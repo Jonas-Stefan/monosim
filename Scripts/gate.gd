@@ -11,14 +11,18 @@ func _process(delta) -> void:
 	return
 
 func calculate() -> bool:
+	var calcInputs: Array[bool] = []
 	for input in inputs:
 		if input.connectedOutput == null:
-			return false
+			calcInputs.append(false)
+		else:
+			calcInputs.append(input.connectedOutput.state)
+
 	if type == "AND":
-		return inputs[0].connectedOutput.state and inputs[1].connectedOutput.state
+		return calcInputs[0] and calcInputs[1]
 	elif type == "OR":
-		return inputs[0].connectedOutput.state or inputs[1].connectedOutput.state
+		return calcInputs[0] or calcInputs[1]
 	elif type == "NOT":
-		return not inputs[0].connectedOutput.state
+		return not calcInputs[0]
 	else:
 		return false

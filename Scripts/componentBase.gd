@@ -2,7 +2,18 @@ extends Node2D
 class_name componentBase
 
 #var state: bool = false
-var selected: bool = false
+var selected: bool = false:
+	set(value):
+		if value == true:
+			for child in get_children():
+				if child.get_class() == "Sprite2D":
+					child.self_modulate = Color(1, 1, 1, 1)
+		else:
+			for child in get_children():
+				if child.get_class() == "Sprite2D":
+					child.self_modulate = Color(0.8, 0.8, 0.8, 1)
+		selected = value
+
 var dragOffset: Vector2
 var outputs: Array[Node2D]
 var inputs: Array[Node2D]
@@ -23,7 +34,7 @@ func _ready() -> void:
 	return
 
 func _process(_delta) -> void:
-	if selected:
+	if selected and globals.tool == globals.tools.MOVE:
 		#move the node to the global mouse position
 		var currentMousePos = get_global_mouse_position()
 		var dPos = currentMousePos + dragOffset - global_position
@@ -56,6 +67,8 @@ func _on_drag_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int)
 	elif globals.tool == globals.tools.DELETE:
 		if event.is_action_pressed("lClick"):
 			delete()
+	elif globals.tool == globals.tools.CHANGE:
+		handle_change_tool(event)
 	return
 
 #handle the delete tool and generally deleting the component
@@ -100,3 +113,10 @@ func handle_move_tool(event: InputEvent) -> void:
 			if input.connectedOutput != null:
 				var wire: Line2D = input.connectedWire
 				wire.set_wire_point_position(wire.get_wire_point_count() - 1, input.global_position - input.connectedOutput.global_position)
+
+func handle_change_tool(event: InputEvent) -> void:
+	var root: Node2D = get_tree().get_root().get_node("root")
+	if event.is_action_pressed("lClick"):
+		for gate in root.gates:
+			gate.selected = false
+		selected = true

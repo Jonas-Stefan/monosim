@@ -60,6 +60,12 @@ theme = ExtResource("1_c8xgw")
 text = "OR"
 script = ExtResource("2_bq4jl")
 
+[node name="delay" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_c8xgw")
+text = "delay"
+script = ExtResource("2_bq4jl")
+
 [node name="switch" type="Button" parent="topButtons/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_c8xgw")
@@ -110,4 +116,10 @@ layout_mode = 2
 theme = ExtResource("1_c8xgw")
 text = "delete
 "
+script = ExtResource("3_kbmjr")
+
+[node name="change" type="Button" parent="toolSelection/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_c8xgw")
+text = "change"
 script = ExtResource("3_kbmjr")

@@ -14,6 +14,9 @@ func _on_button_down():
 	elif self.name == "OR":
 		var gate: Node2D = load("res://BaseComponents/or.tscn").instantiate()
 		add_gate(gate)
+	elif self.name == "delay":
+		var gate: Node2D = load("res://BaseComponents/delay.tscn").instantiate()
+		add_gate(gate)
 	elif self.name == "switch":
 		var pin: Node2D = load("res://BaseComponents/switch.tscn").instantiate()
 		add_pin(pin)
@@ -25,6 +28,8 @@ func _on_button_down():
 		return
 
 func add_gate(gate: Node2D) -> void:
+	reset_tool()
+
 	var root: Node2D = get_tree().get_root().get_node("root")
 	var gates: Node2D = root.get_node("gates")
 	gate.selected = true
@@ -32,8 +37,15 @@ func add_gate(gate: Node2D) -> void:
 	root.gates.append(gate)
 
 func add_pin(pin: Node2D) -> void:
+	reset_tool()
+
 	var root: Node2D = get_tree().get_root().get_node("root")
 	var pins: Node2D = root.get_node("pins")
 	pin.selected = true
 	pins.add_child(pin)
 	root.pins.append(pin)
+
+func reset_tool() -> void:
+	globals.tool = globals.tools.MOVE
+	
+	return

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/gate.gd" id="1_dk1fp"]
 [ext_resource type="Texture2D" uid="uid://cm6pr0epubyad" path="res://Sprites/gate.png" id="2_dyrwo"]
-[ext_resource type="LabelSettings" uid="uid://bowtv2igofvn7" path="res://Fonts/font.tres" id="3_fqq7q"]
+[ext_resource type="LabelSettings" uid="uid://bowtv2igofvn7" path="res://Fonts/nameFont.tres" id="3_fqq7q"]
 [ext_resource type="PackedScene" uid="uid://bm66f64gdvxcf" path="res://Scenes/input.tscn" id="4_j5a3h"]
 [ext_resource type="PackedScene" uid="uid://c46q0dw0jb7ye" path="res://Scenes/output.tscn" id="5_kwoff"]
 
@@ -13,7 +13,7 @@ script = ExtResource("1_dk1fp")
 type = "NOT"
 
 [node name="body" type="Sprite2D" parent="."]
-modulate = Color(0.705882, 0, 0, 1)
+modulate = Color(0.745098, 0, 0, 1)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_dyrwo")
 

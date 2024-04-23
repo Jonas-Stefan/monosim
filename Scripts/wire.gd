@@ -110,37 +110,29 @@ func _on_wire_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int,
 		params.collide_with_bodies = false
 		for dict in space.intersect_point(params):
 			if dict["collider"].get_parent().name.substr(0, 5) == "input" or dict["collider"].get_parent().name.substr(0, 6) == "output":
-				print("return")
 				return
 
 		#actually create the new wire
 		var newWire: Line2D = load("res://Scenes/wire.tscn").instantiate()
-		print("new wire")
 
 		#add the wire to the scene, assuming the path is 'output' - 'wires' - 'wire'
 		get_parent().get_parent().wires.append(newWire)
 		get_parent().add_child(newWire)
 		for i in range(wireIndex + 1):
-			print("adding wire point")
 			newWire.add_wire_point(get_wire_point_position(i))
 		
 		#add a final point to the wire
 		#distance between last point and mouse
 		var distance: Vector2 = get_global_mouse_position() - get_wire_point_global_position(wireIndex)
 		var length: int = int(globals.snap_to_grid(Vector2(distance.length(), 0)).x)
-		print("length: " + str(length))
 
 		#angle between last point and next point in the 'parent wire'
 		var lastPoint: Vector2 = newWire.get_wire_point_position(newWire.get_point_count() - 1)
 		var nextPoint: Vector2 = get_wire_point_position(wireIndex + 1)
 		var angle: float = atan2(nextPoint.y - lastPoint.y, nextPoint.x - lastPoint.x)
-		print("angle: " + str(rad_to_deg(angle)))
 
 		#add the point
-		print(newWire.get_point_count())
 		newWire.add_wire_point(get_wire_point_position(wireIndex) + Vector2(cos(angle) * length, sin(angle) * length))
-		print("added final point")
-		print(newWire.get_point_count())
 
 		#add a point that will move with the mouse
 		newWire.add_wire_point(Vector2(0, 0))
