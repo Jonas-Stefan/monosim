@@ -28,25 +28,11 @@ func _ready() -> void:
 
 
 func _process(_delta) -> void:
-	if Input.is_action_just_pressed("delete"):
-		#delete every selected component
-		#delete_selection()
-		pass
-
 	if globals.selectedOutput != null:
 		if globals.selectedOutput.wires.size() == 0:
 			return
 		var wires: Array[Line2D] = globals.selectedOutput.wires
 		var wire: Line2D = wires[wires.size() - 1]
-
-		#detect if the user wants to add a new point to the line
-		if Input.is_action_just_pressed("lClick"):
-			add_wire_point(wire)
-		
-		if Input.is_action_just_pressed("rClick"):
-			#remove the last point of the wire
-			wire.remove_wire_point(wire.get_wire_point_count() - 1)
-
 		#visualize the wire by updating the last point to the mouse position
 		visualize_wire(wire)
 
@@ -91,8 +77,19 @@ func add_wire_point(wire: Line2D) -> void:
 	params.collide_with_areas = true
 	params.collide_with_bodies = false
 	for dict in space.intersect_point(params):
-		if dict["collider"].get_parent().name.substr(0, 6) == "output":
+		if dict["collider"].get_parent().name.substr(0, 6) == "output" or dict["collider"].get_parent().name.substr(0, 5) == "input":
 			return
 
 	#detect if the user wants to add a new point to the line
 	wire.add_wire_point(get_global_mouse_position() - globals.selectedOutput.get_global_position())
+
+func _input(event: InputEvent) -> void:
+	if globals.selectedOutput != null:
+		var wires: Array[Line2D] = globals.selectedOutput.wires
+		var wire: Line2D = wires[wires.size() - 1]
+
+		if event.is_action_pressed("lClick"):
+			add_wire_point(wire)
+		
+		if event.is_action_pressed("rClick"):
+			wire.remove_wire_point(wire.get_wire_point_count() - 1)

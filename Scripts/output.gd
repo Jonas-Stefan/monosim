@@ -28,3 +28,7 @@ func _on_input_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int
 		var newWire: Line2D = load("res://Scenes/wire.tscn").instantiate()
 		wires.append(newWire)
 		wiresNode.add_child(newWire)
+		
+		#two starter points
+		newWire.add_wire_point(Vector2(0, 0))
+		newWire.add_wire_point(Vector2(0, 0))

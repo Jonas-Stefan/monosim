@@ -3,12 +3,6 @@ extends Line2D
 var wireAreas: Array[Area2D] = []
 var areaWidth: int = 8
 
-func _ready() -> void:
-	#add two first points
-	add_wire_point(Vector2(0, 0))
-	add_wire_point(Vector2(0, 0))
-	return
-
 #takes a point relative to the origin of the wire and adds it to the wire
 func add_wire_point(point: Vector2) -> void:
 	#add the point to the line2d
@@ -48,7 +42,7 @@ func set_wire_point_position(index: int, pos: Vector2) -> void:
 	return
 
 func remove_wire_point(index: int) -> void:
-	if get_point_count() == 1:
+	if get_point_count() == 2:
 		globals.selectedOutput = null
 		delete()
 		return
@@ -108,7 +102,7 @@ func _on_wire_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int,
 	
 	#create a new wire
 	if event.is_action_pressed("lClick"):
-		#check if the mouse is hovering over an in-/output by useing intersect_point
+		#check if the mouse is hovering over an in-/output by using intersect_point
 		var space: PhysicsDirectSpaceState2D = PhysicsServer2D.space_get_direct_state(get_world_2d().space)
 		var params: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
 		params.position = get_global_mouse_position()
@@ -116,29 +110,40 @@ func _on_wire_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int,
 		params.collide_with_bodies = false
 		for dict in space.intersect_point(params):
 			if dict["collider"].get_parent().name.substr(0, 5) == "input" or dict["collider"].get_parent().name.substr(0, 6) == "output":
+				print("return")
 				return
 
 		#actually create the new wire
 		var newWire: Line2D = load("res://Scenes/wire.tscn").instantiate()
+		print("new wire")
 
 		#add the wire to the scene, assuming the path is 'output' - 'wires' - 'wire'
 		get_parent().get_parent().wires.append(newWire)
 		get_parent().add_child(newWire)
 		for i in range(wireIndex + 1):
+			print("adding wire point")
 			newWire.add_wire_point(get_wire_point_position(i))
 		
 		#add a final point to the wire
 		#distance between last point and mouse
-		var distance: Vector2 = get_global_mouse_position() - get_wire_point_global_position(wireIndex + 1)
+		var distance: Vector2 = get_global_mouse_position() - get_wire_point_global_position(wireIndex)
 		var length: int = int(globals.snap_to_grid(Vector2(distance.length(), 0)).x)
+		print("length: " + str(length))
 
 		#angle between last point and next point in the 'parent wire'
 		var lastPoint: Vector2 = newWire.get_wire_point_position(newWire.get_point_count() - 1)
 		var nextPoint: Vector2 = get_wire_point_position(wireIndex + 1)
 		var angle: float = atan2(nextPoint.y - lastPoint.y, nextPoint.x - lastPoint.x)
+		print("angle: " + str(rad_to_deg(angle)))
 
 		#add the point
-		newWire.add_wire_point(get_wire_point_position(wireIndex + 1) - Vector2(cos(angle) * length, sin(angle) * length))
+		print(newWire.get_point_count())
+		newWire.add_wire_point(get_wire_point_position(wireIndex) + Vector2(cos(angle) * length, sin(angle) * length))
+		print("added final point")
+		print(newWire.get_point_count())
+
+		#add a point that will move with the mouse
+		newWire.add_wire_point(Vector2(0, 0))
 
 		#newWire.add_wire_point(get_global_mouse_position() - global_position)
 		globals.selectedOutput = get_parent().get_parent()
