@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://qlhdgmqqo81o"]
+
+[ext_resource type="Script" path="res://Scripts/chip.gd" id="1_jktam"]
+[ext_resource type="Texture2D" uid="uid://cm6pr0epubyad" path="res://Sprites/gate.png" id="2_7wfa0"]
+[ext_resource type="LabelSettings" uid="uid://bowtv2igofvn7" path="res://Fonts/nameFont.tres" id="3_eeaw8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04il3"]
+
+[node name="chip" type="Node2D"]
+script = ExtResource("1_jktam")
+
+[node name="body" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_7wfa0")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -22.5
+offset_right = 34.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "chip"
+label_settings = ExtResource("3_eeaw8")
+horizontal_alignment = 1
+
+[node name="dragArea" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="dragArea"]
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_04il3")

@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5w0247usukuj"]
+
+[ext_resource type="Script" path="res://Scripts/chipCreationUI.gd" id="1_qkunp"]
+[ext_resource type="Theme" uid="uid://drfn2y5u60xn2" path="res://UITheme.tres" id="1_rpq0n"]
+[ext_resource type="Script" path="res://Scripts/finishChipBtn.gd" id="3_mohq3"]
+
+[node name="chipCreationScreen" type="CanvasLayer"]
+script = ExtResource("1_qkunp")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="Control/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="nameField" type="LineEdit" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rpq0n")
+placeholder_text = "chip name"
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="color" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "change color
+"
+horizontal_alignment = 1
+
+[node name="colorBtn" type="ColorPickerButton" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_rpq0n")
+text = "change color"
+
+[node name="HSeparator2" type="HSeparator" parent="Control/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="finishChipBtn" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_rpq0n")
+text = "create chip"
+script = ExtResource("3_mohq3")
+
+[node name="HSeparator3" type="HSeparator" parent="Control/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3

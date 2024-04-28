@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cld0n4yche0pl"]
+[gd_scene load_steps=5 format=3 uid="uid://cld0n4yche0pl"]
 
 [ext_resource type="Theme" uid="uid://drfn2y5u60xn2" path="res://UITheme.tres" id="1_c8xgw"]
 [ext_resource type="Script" path="res://Scripts/componentBtn.gd" id="2_bq4jl"]
 [ext_resource type="Script" path="res://Scripts/toolBtn.gd" id="3_kbmjr"]
+[ext_resource type="Script" path="res://Scripts/showChipCreationBtn.gd" id="4_or8gs"]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -12,7 +13,6 @@ layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
-mouse_filter = 2
 mouse_force_pass_scroll_events = false
 
 [node name="ColorRect" type="ColorRect" parent="topButtons"]
@@ -21,7 +21,6 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
-mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="topButtons"]
@@ -135,3 +134,37 @@ layout_mode = 2
 theme = ExtResource("1_c8xgw")
 text = "edit"
 script = ExtResource("3_kbmjr")
+
+[node name="chipCreation" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="chipCreation"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="showChipCreationBtn" type="Button" parent="chipCreation/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_c8xgw")
+text = "create chip
+"
+script = ExtResource("4_or8gs")

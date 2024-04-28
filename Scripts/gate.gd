@@ -1,5 +1,6 @@
 extends componentBase
 
+#export is neccecary!!!
 @export var type: String
 
 func _ready():

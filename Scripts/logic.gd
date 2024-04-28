@@ -43,9 +43,18 @@ func game_loop() -> void:
 		for gate in gates:
 			nextStates.append(gate.calculate())
 		
+		#calculate next state of all chips
+		for chip in chips:
+			chip.calculate()
+		
+		#set next state of all gates
 		for i in nextStates.size():
 			for output in gates[i].outputs:
 				output.state = nextStates[i]
+
+		#set next state of all chips
+		for chip in chips:
+			chip.set_next_state()
 			
 		#wait for the next tick
 		await get_tree().create_timer(1.0 / tps).timeout

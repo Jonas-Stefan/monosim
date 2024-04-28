@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch0ojc88ansrd"]
+[gd_scene load_steps=7 format=3 uid="uid://ch0ojc88ansrd"]
 
 [ext_resource type="Script" path="res://Scripts/logic.gd" id="1_pfpyv"]
 [ext_resource type="Script" path="res://Scripts/cam.gd" id="2_jcwwb"]
+[ext_resource type="Resource" uid="uid://drqld0khjm1k1" path="res://Chips/Chips/fancyXOR.tres" id="4_dyf58"]
+[ext_resource type="PackedScene" uid="uid://b5w0247usukuj" path="res://Scenes/chip_creation_screen.tscn" id="4_hcrta"]
+[ext_resource type="PackedScene" uid="uid://qlhdgmqqo81o" path="res://Chips/Prefab/chip.tscn" id="5_cbirv"]
 [ext_resource type="PackedScene" uid="uid://cld0n4yche0pl" path="res://Scenes/ui.tscn" id="7_xsrpf"]
 
 [node name="root" type="Node2D"]
@@ -17,4 +20,9 @@ script = ExtResource("2_jcwwb")
 
 [node name="chips" type="Node2D" parent="."]
 
+[node name="chip" parent="chips" instance=ExtResource("5_cbirv")]
+chipResource = ExtResource("4_dyf58")
+
 [node name="UI" parent="." instance=ExtResource("7_xsrpf")]
+
+[node name="chipCreationScreen" parent="." instance=ExtResource("4_hcrta")]
