@@ -4,10 +4,11 @@ var delay: int = 1:
 	set(value):
 		delay = value
 		delayArray = []
-		for i in range(0, delay):
-			delayArray.append(false)
+		delayArray.append([value, false])
 		$delay.text = str(delay) + " ticks"
-var delayArray: Array[bool] = [false]
+
+
+var delayArray: Array = []
 @onready var delayLabel: Label = $delay
 
 # Called when the node enters the scene tree for the first time.
@@ -26,14 +27,18 @@ func calculate() -> bool:
 			return false
 		else:
 			return inputs[0].connectedOutput.state
-	var returnState: bool = delayArray[0]
-
-	delayArray.remove_at(0)
+	
+	if delayArray[0][0] <= 0:
+		delayArray.remove_at(0)
+	
+	var returnState: bool = delayArray[0][1]
+	
+	delayArray[0][0] -= 1
 
 	if inputs[0].connectedOutput == null:
-		delayArray.append(false)
+		add_input(false)
 	else:
-		delayArray.append(inputs[0].connectedOutput.state)
+		add_input(inputs[0].connectedOutput.state)
 	
 	return returnState
 
@@ -49,3 +54,9 @@ func _input(event):
 					delay = int(str(delay).substr(0, str(delay).length() - 1))
 				elif event.get_keycode() == 4194309:
 					selected = false
+
+func add_input(input: bool) -> void:
+	if input == delayArray[delayArray.size() - 1][1]:
+		delayArray[delayArray.size() - 1][0] += 1
+	else:
+		delayArray.append([1, input])

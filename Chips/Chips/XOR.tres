@@ -1,36 +1,36 @@
-[gd_resource type="Resource" script_class="chipBase" load_steps=7 format=3 uid="uid://dew1h67b00xpc"]
+[gd_resource type="Resource" script_class="chipBase" load_steps=7 format=3 uid="uid://js3tqjwjvw24"]
 
-[ext_resource type="Script" path="res://Chips/Resource/strippedGate.gd" id="1_cmcxh"]
-[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="2_3yoch"]
+[ext_resource type="Script" path="res://Chips/Resource/strippedGate.gd" id="1_ufasx"]
+[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="2_2g4x3"]
 
-[sub_resource type="Resource" id="Resource_1qimp"]
-script = ExtResource("1_cmcxh")
+[sub_resource type="Resource" id="Resource_3ei6y"]
+script = ExtResource("1_ufasx")
 type = "OR"
 state = false
 inputs = [0, 1]
 
-[sub_resource type="Resource" id="Resource_ljqjr"]
-script = ExtResource("1_cmcxh")
+[sub_resource type="Resource" id="Resource_n4sel"]
+script = ExtResource("1_ufasx")
 type = "AND"
 state = false
 inputs = [0, 1]
 
-[sub_resource type="Resource" id="Resource_x2ok3"]
-script = ExtResource("1_cmcxh")
+[sub_resource type="Resource" id="Resource_ld3s8"]
+script = ExtResource("1_ufasx")
 type = "NOT"
 state = false
-inputs = [SubResource("Resource_ljqjr")]
+inputs = [SubResource("Resource_n4sel")]
 
-[sub_resource type="Resource" id="Resource_e56mf"]
-script = ExtResource("1_cmcxh")
+[sub_resource type="Resource" id="Resource_bcoxm"]
+script = ExtResource("1_ufasx")
 type = "AND"
 state = false
-inputs = [SubResource("Resource_1qimp"), SubResource("Resource_x2ok3")]
+inputs = [SubResource("Resource_3ei6y"), SubResource("Resource_ld3s8")]
 
 [resource]
-script = ExtResource("2_3yoch")
+script = ExtResource("2_2g4x3")
 name = "XOR"
-color = Color(0.984314, 0.27451, 0, 1)
-gates = Array[ExtResource("1_cmcxh")]([SubResource("Resource_1qimp"), SubResource("Resource_ljqjr"), SubResource("Resource_x2ok3"), SubResource("Resource_e56mf")])
+color = Color(1, 0, 1, 1)
+gates = Array[ExtResource("1_ufasx")]([SubResource("Resource_3ei6y"), SubResource("Resource_n4sel"), SubResource("Resource_ld3s8"), SubResource("Resource_bcoxm")])
 inputs = 2
-outputs = [SubResource("Resource_e56mf")]
+outputs = [SubResource("Resource_bcoxm")]

@@ -78,6 +78,11 @@ func delete() -> void:
 		if root.gates[i] == self:
 			root.gates.remove_at(i)
 			break
+	
+	for i in range(root.chips.size()):
+		if root.chips[i] == self:
+			root.chips.remove_at(i)
+			break
 
 	for output in outputs:
 		for wire in output.wires:

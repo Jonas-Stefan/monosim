@@ -1,8 +1,15 @@
 extends Button
 
+var root: Node2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.button_down.connect(_on_button_down)
+	
+	root = get_tree().get_root().get_node("root")
+	
+
+	
 
 func _on_button_down():
 	if self.name == "NOT":
@@ -24,13 +31,12 @@ func _on_button_down():
 		var pin: Node2D = load("res://BaseComponents/lamp.tscn").instantiate()
 		add_pin(pin)
 	else:
-		print("error")
+		add_chip(self.name)
 		return
 
 func add_gate(gate: Node2D) -> void:
 	reset_tool()
 
-	var root: Node2D = get_tree().get_root().get_node("root")
 	var gates: Node2D = root.get_node("gates")
 	gate.selected = true
 	gates.add_child(gate)
@@ -39,13 +45,24 @@ func add_gate(gate: Node2D) -> void:
 func add_pin(pin: Node2D) -> void:
 	reset_tool()
 
-	var root: Node2D = get_tree().get_root().get_node("root")
 	var pins: Node2D = root.get_node("pins")
 	pin.selected = true
 	pins.add_child(pin)
 	root.pins.append(pin)
+	return
+
+func add_chip(name: String) -> void:
+	reset_tool()
+	
+	var chips: Node2D = root.get_node("chips")
+	
+	var newChip: Node2D = load("res://Chips/Prefab/chip.tscn").instantiate()
+	newChip.chipResource = load("res://Chips/Chips/" + name + ".tres") #this may be buggy, I don't know though
+	newChip.selected = true
+	chips.add_child(newChip)
+	root.chips.append(newChip)
+	return
 
 func reset_tool() -> void:
 	globals.tool = globals.tools.MOVE
-	
 	return

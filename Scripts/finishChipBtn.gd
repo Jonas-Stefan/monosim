@@ -157,7 +157,12 @@ func create_new_chip() -> void:
 				#the output is connected to an input of the chip
 				chipResource.outputs.append(connectedChip.inputs[internalOutput])
 			else:
-				chipResource.outputs.append(internalOutput)
+				#check if the gate is outdated
+				if strippedGates.find(internalOutput, 0) == -1:
+					var newGate = strippedGates[chipIndexes[chips.find(connectedChip, 0)][connectedChip.chipResource.gates.find(internalOutput, 0)]]
+					chipResource.outputs.append(newGate)
+				
+				#chipResource.outputs.append(internalOutput)
 			print("the input is a chip, implement this later")
 		elif switches.find(lamp.inputs[0].connectedOutput.get_parent(), 0) != -1:
 			#the input is a switch
@@ -177,10 +182,18 @@ func create_new_chip() -> void:
 		print("chip already exists")
 	else:
 		ResourceSaver.save(chipResource, "res://Chips/Chips/" + chipResource.name + ".tres")
-		get_tree().get_root().get_node("root").get_node("chipCreationScreen").hide()
+	root.get_node("chipCreationScreen").hide()
 	
 	#add the chip to the top buttons
 	#I will do it later :)
+	var UInode = root.get_node("UI")
+	var btnContainer = UInode.get_node("topButtons/VBoxContainer/MarginContainer/btnContainer")
+	var newBtn = Button.new()
+	newBtn.theme = load("res://UITheme.tres")
+	newBtn.set_script(load("res://Scripts/componentBtn.gd"))
+	newBtn.name = chipName
+	newBtn.text = chipName
+	btnContainer.add_child(newBtn)
 
 
 
