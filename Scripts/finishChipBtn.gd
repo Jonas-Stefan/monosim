@@ -70,6 +70,8 @@ func create_new_chip() -> void:
 			else:
 				print("error, the input of a gate is connected to something that isn't a gate or a switch or a pin")
 	
+	
+	var chipIndexes: Array = []
 
 
 	#add the gates from the chips
@@ -81,30 +83,38 @@ func create_new_chip() -> void:
 
 	#iterate over all chips
 	for chip in chips:
+		var indexes: Array[int] = []
 		#iterate over all the gate in each chip
 		for gate in chip.chipResource.gates:
-			strippedGates.append(gate)
+			var newGate: strippedGate = gate.duplicate()
+			strippedGates.append(newGate)
+			indexes.append(strippedGates.size() - 1)
+		
+		chipIndexes.append(indexes)
 
 		#iterate over all the gates of the chip
 		for gate in chip.chipResource.gates:
 			#iterate over all the inputs of the gate
-			for input in gate.inputs:
+			var newInputs: Array = gate.inputs.duplicate()
+			for i in range(newInputs.size()):
+				var input = newInputs[i]
 				#check if the input of a gate is connected to a pin of the chip and rewire it in that case
 				if typeof(input) == TYPE_INT:
 					#check if the pin is connected to nothing
 					if chip.inputs[input].connectedOutput == null:
-						input = null
+						newInputs[i] = null
 					
 					#check if the pin is connected to a switch
 					elif switches.find(chip.inputs[input].connectedOutput.get_parent(), 0) != -1:
 						#find the index of the switch
 						var index: int = switches.find(chip.inputs[input].connectedOutput.get_parent(), 0)
-						input = index
+						newInputs[i] = index
+						print("index: " + str(index))
 					
 					#check if the pin is connected to a gate
 					elif gates.find(chip.inputs[input].connectedOutput.get_parent(), 0) != -1:
 						#find the index of the gate
-						input = strippedGates[gates.find(chip.inputs[input].connectedOutput.get_parent(), 0)]
+						newInputs[i] = strippedGates[gates.find(chip.inputs[input].connectedOutput.get_parent(), 0)]
 					
 					#check if the pin is connected to a chip
 					elif chips.find(chip.inputs[input].connectedOutput.get_parent(), 0) != -1:
@@ -114,11 +124,18 @@ func create_new_chip() -> void:
 
 						if typeof(internalOutput) == TYPE_INT:
 							#the output is connected to an input of the chip
-							input = connectedChip.inputs[internalOutput]
+							newInputs[i] = connectedChip.inputs[internalOutput]
 						else:
-							input = internalOutput
+							newInputs[i] = internalOutput
 					else:
 						print("error, the pin is connected to something that isn't a gate or a switch or a pin")
+			
+			strippedGates[indexes[chip.chipResource.gates.find(gate, 0)]].inputs = newInputs
+			update_inputs(strippedGates[indexes[chip.chipResource.gates.find(gate, 0)]], strippedGates, chips, chipIndexes)
+			print("new inputs: " + str(newInputs))
+
+
+
 
 	chipResource.gates = strippedGates
 
@@ -169,3 +186,21 @@ func create_new_chip() -> void:
 
 func sort_by_y_pos(a: Node2D, b: Node2D) -> bool:
 	return a.position.y < b.position.y
+
+func update_inputs(gate: strippedGate, strippedGates: Array[strippedGate], chips: Array[Node2D], chipIndexes: Array) -> void:
+		for i in range(gate.inputs.size()):
+			var input = gate.inputs[i]
+			print("iterating over input")
+			if typeof(input) != TYPE_INT:
+				print("type not int")
+				if strippedGates.find(input, 0) == -1:
+					print("outdated inputs")
+					#the gate is not in the strippedGate array, so it is most likely outdated
+					
+					#find the newer version of the gate
+					for chip in chips:
+						for chipGate in chip.chipResource.gates:
+							if chipGate == input:
+								print("found self")
+								var newGate = strippedGates[chipIndexes[chips.find(chip, 0)][chip.chipResource.gates.find(input, 0)]]
+								gate.inputs[i] = newGate

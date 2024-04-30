@@ -1,36 +1,36 @@
-[gd_resource type="Resource" script_class="chipBase" load_steps=7 format=3 uid="uid://c65gmvf3kvcqc"]
+[gd_resource type="Resource" script_class="chipBase" load_steps=7 format=3 uid="uid://dew1h67b00xpc"]
 
-[ext_resource type="Script" path="res://Chips/Resource/strippedGate.gd" id="1_3dj8y"]
-[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="2_qdhce"]
+[ext_resource type="Script" path="res://Chips/Resource/strippedGate.gd" id="1_cmcxh"]
+[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="2_3yoch"]
 
-[sub_resource type="Resource" id="Resource_r7b4m"]
-script = ExtResource("1_3dj8y")
-type = "AND"
-state = false
-inputs = [0, 1]
-
-[sub_resource type="Resource" id="Resource_7pire"]
-script = ExtResource("1_3dj8y")
-type = "NOT"
-state = false
-inputs = [SubResource("Resource_r7b4m")]
-
-[sub_resource type="Resource" id="Resource_wiri7"]
-script = ExtResource("1_3dj8y")
+[sub_resource type="Resource" id="Resource_1qimp"]
+script = ExtResource("1_cmcxh")
 type = "OR"
 state = false
 inputs = [0, 1]
 
-[sub_resource type="Resource" id="Resource_25o27"]
-script = ExtResource("1_3dj8y")
+[sub_resource type="Resource" id="Resource_ljqjr"]
+script = ExtResource("1_cmcxh")
 type = "AND"
 state = false
-inputs = [SubResource("Resource_wiri7"), SubResource("Resource_7pire")]
+inputs = [0, 1]
+
+[sub_resource type="Resource" id="Resource_x2ok3"]
+script = ExtResource("1_cmcxh")
+type = "NOT"
+state = false
+inputs = [SubResource("Resource_ljqjr")]
+
+[sub_resource type="Resource" id="Resource_e56mf"]
+script = ExtResource("1_cmcxh")
+type = "AND"
+state = false
+inputs = [SubResource("Resource_1qimp"), SubResource("Resource_x2ok3")]
 
 [resource]
-script = ExtResource("2_qdhce")
+script = ExtResource("2_3yoch")
 name = "XOR"
-color = Color(0, 0.380392, 0, 1)
-gates = Array[ExtResource("1_3dj8y")]([SubResource("Resource_7pire"), SubResource("Resource_r7b4m"), SubResource("Resource_wiri7"), SubResource("Resource_25o27")])
+color = Color(0.984314, 0.27451, 0, 1)
+gates = Array[ExtResource("1_cmcxh")]([SubResource("Resource_1qimp"), SubResource("Resource_ljqjr"), SubResource("Resource_x2ok3"), SubResource("Resource_e56mf")])
 inputs = 2
-outputs = [SubResource("Resource_25o27")]
+outputs = [SubResource("Resource_e56mf")]

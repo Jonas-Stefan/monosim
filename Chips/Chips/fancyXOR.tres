@@ -1,42 +1,66 @@
-[gd_resource type="Resource" script_class="chipBase" load_steps=8 format=3 uid="uid://drqld0khjm1k1"]
+[gd_resource type="Resource" script_class="chipBase" load_steps=12 format=3 uid="uid://ddlxev233c5d5"]
 
-[ext_resource type="Script" path="res://Chips/Resource/strippedGate.gd" id="1_sakyw"]
-[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="2_ha62q"]
+[ext_resource type="Script" path="res://Chips/Resource/strippedGate.gd" id="1_mbocu"]
+[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="2_pop0f"]
 
-[sub_resource type="Resource" id="Resource_r7b4m"]
-script = ExtResource("1_sakyw")
-type = "AND"
+[sub_resource type="Resource" id="Resource_cb4ym"]
+script = ExtResource("1_mbocu")
+type = "OR"
 state = false
 inputs = [0, 1]
 
-[sub_resource type="Resource" id="Resource_7pire"]
-script = ExtResource("1_sakyw")
+[sub_resource type="Resource" id="Resource_l4qa1"]
+script = ExtResource("1_mbocu")
+type = "OR"
+state = false
+inputs = [SubResource("Resource_cb4ym"), 2]
+
+[sub_resource type="Resource" id="Resource_1oq4v"]
+script = ExtResource("1_mbocu")
+type = "AND"
+state = false
+inputs = [SubResource("Resource_cb4ym"), 2]
+
+[sub_resource type="Resource" id="Resource_3cgu0"]
+script = ExtResource("1_mbocu")
 type = "NOT"
 state = true
-inputs = [SubResource("Resource_r7b4m")]
+inputs = [SubResource("Resource_1oq4v")]
 
-[sub_resource type="Resource" id="Resource_wiri7"]
-script = ExtResource("1_sakyw")
-type = "OR"
-state = false
-inputs = [0, 1]
-
-[sub_resource type="Resource" id="Resource_25o27"]
-script = ExtResource("1_sakyw")
+[sub_resource type="Resource" id="Resource_3u2kv"]
+script = ExtResource("1_mbocu")
 type = "AND"
 state = false
-inputs = [SubResource("Resource_wiri7"), SubResource("Resource_7pire")]
+inputs = [SubResource("Resource_l4qa1"), SubResource("Resource_3cgu0")]
 
-[sub_resource type="Resource" id="Resource_rpkoy"]
-script = ExtResource("1_sakyw")
+[sub_resource type="Resource" id="Resource_1qimp"]
+script = ExtResource("1_mbocu")
 type = "OR"
 state = false
 inputs = [0, 1]
 
+[sub_resource type="Resource" id="Resource_ljqjr"]
+script = ExtResource("1_mbocu")
+type = "AND"
+state = false
+inputs = [0, 1]
+
+[sub_resource type="Resource" id="Resource_x2ok3"]
+script = ExtResource("1_mbocu")
+type = "NOT"
+state = true
+inputs = [SubResource("Resource_ljqjr")]
+
+[sub_resource type="Resource" id="Resource_e56mf"]
+script = ExtResource("1_mbocu")
+type = "AND"
+state = false
+inputs = [SubResource("Resource_1qimp"), SubResource("Resource_x2ok3")]
+
 [resource]
-script = ExtResource("2_ha62q")
+script = ExtResource("2_pop0f")
 name = "fancyXOR"
-color = Color(0.729412, 0, 0.772549, 1)
-gates = Array[ExtResource("1_sakyw")]([SubResource("Resource_7pire"), SubResource("Resource_r7b4m"), SubResource("Resource_wiri7"), SubResource("Resource_25o27"), SubResource("Resource_rpkoy")])
+color = Color(1, 0, 1, 1)
+gates = Array[ExtResource("1_mbocu")]([SubResource("Resource_cb4ym"), SubResource("Resource_l4qa1"), SubResource("Resource_1oq4v"), SubResource("Resource_3cgu0"), SubResource("Resource_3u2kv")])
 inputs = 3
-outputs = [SubResource("Resource_25o27")]
+outputs = [SubResource("Resource_e56mf")]

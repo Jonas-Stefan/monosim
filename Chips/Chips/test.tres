@@ -1,0 +1,66 @@
+[gd_resource type="Resource" script_class="chipBase" load_steps=12 format=3 uid="uid://dgkccc0y7joyb"]
+
+[ext_resource type="Script" path="res://Chips/Resource/strippedGate.gd" id="1_5xdbl"]
+[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="2_dcy8l"]
+
+[sub_resource type="Resource" id="Resource_0ehsa"]
+script = ExtResource("1_5xdbl")
+type = "OR"
+state = false
+inputs = [0, 1]
+
+[sub_resource type="Resource" id="Resource_c3hlw"]
+script = ExtResource("1_5xdbl")
+type = "OR"
+state = false
+inputs = [SubResource("Resource_0ehsa"), 2]
+
+[sub_resource type="Resource" id="Resource_hftts"]
+script = ExtResource("1_5xdbl")
+type = "AND"
+state = false
+inputs = [SubResource("Resource_0ehsa"), 2]
+
+[sub_resource type="Resource" id="Resource_ljqjr"]
+script = ExtResource("1_5xdbl")
+type = "AND"
+state = false
+inputs = [0, 1]
+
+[sub_resource type="Resource" id="Resource_5i3gs"]
+script = ExtResource("1_5xdbl")
+type = "NOT"
+state = true
+inputs = [SubResource("Resource_ljqjr")]
+
+[sub_resource type="Resource" id="Resource_1qimp"]
+script = ExtResource("1_5xdbl")
+type = "OR"
+state = false
+inputs = [0, 1]
+
+[sub_resource type="Resource" id="Resource_x2ok3"]
+script = ExtResource("1_5xdbl")
+type = "NOT"
+state = true
+inputs = [SubResource("Resource_ljqjr")]
+
+[sub_resource type="Resource" id="Resource_k680m"]
+script = ExtResource("1_5xdbl")
+type = "AND"
+state = false
+inputs = [SubResource("Resource_1qimp"), SubResource("Resource_x2ok3")]
+
+[sub_resource type="Resource" id="Resource_e56mf"]
+script = ExtResource("1_5xdbl")
+type = "AND"
+state = false
+inputs = [SubResource("Resource_1qimp"), SubResource("Resource_x2ok3")]
+
+[resource]
+script = ExtResource("2_dcy8l")
+name = "test"
+color = Color(0, 0, 0, 1)
+gates = Array[ExtResource("1_5xdbl")]([SubResource("Resource_0ehsa"), SubResource("Resource_c3hlw"), SubResource("Resource_hftts"), SubResource("Resource_5i3gs"), SubResource("Resource_k680m")])
+inputs = 3
+outputs = [SubResource("Resource_e56mf")]
