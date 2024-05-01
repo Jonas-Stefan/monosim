@@ -136,7 +136,6 @@ func create_new_chip() -> void:
 
 
 
-
 	chipResource.gates = strippedGates
 
 	chipResource.outputs = []
