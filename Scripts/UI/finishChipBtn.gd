@@ -24,12 +24,16 @@ func create_new_chip() -> void:
 	var root: Node2D = get_tree().get_root().get_node("root")
 
 	var oldGateNodes: Array[graphNode] = []
-	var gateNodes: Array[String] = []
+	var gateTypes: Array[String] = []
 
 	#add the gates to the new chip
 	for node in root.componentGraph.nodes:
 		if node.type != "lamp" and node.type != "":
-			gateNodes.append(node.type)
+			gateTypes.append(node.type)
+			oldGateNodes.append(node)
+	
+	for chip in root.chips:
+		for node in chip.chipGraph.nodes:
 			oldGateNodes.append(node)
 	
 	var gateEdges: Array = []
@@ -42,6 +46,18 @@ func create_new_chip() -> void:
 		#the edge would be connected with an input or output if the indices are -1, in that case I don't even need the edge.
 		if inputIndex != -1 and outputIndex != -1:
 			gateEdges.append([inputIndex, outputIndex])
+
+
+	#add all the chips to the new chip
+	for chip in root.chips:
+		for edge in chip.chipResource.gateEdges:
+			var edgeInput: int = edge[0] + gateTypes.size()
+			var edgeOutput: int = edge[1] + gateTypes.size()
+			gateEdges.append([edgeInput, edgeOutput])
+
+		for node in chip.chipResource.gateTypes:
+			gateTypes.append(node)
+
 
 	#get the inputs of the chip
 	var switches: Array[Node2D] = []
@@ -85,7 +101,7 @@ func create_new_chip() -> void:
 	chipResource.color = colorBtn.color
 	chipResource.inputs = inputs
 	chipResource.outputs = outputs
-	chipResource.gateTypes = gateNodes
+	chipResource.gateTypes = gateTypes
 	chipResource.gateEdges = gateEdges
 	
 
