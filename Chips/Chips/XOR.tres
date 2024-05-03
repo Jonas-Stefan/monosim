@@ -1,36 +1,12 @@
-[gd_resource type="Resource" script_class="chipBase" load_steps=7 format=3 uid="uid://js3tqjwjvw24"]
+[gd_resource type="Resource" script_class="chipBase" load_steps=2 format=3 uid="uid://bj47qtlkec3o8"]
 
-[ext_resource type="Script" path="res://Chips/Resource/strippedGate.gd" id="1_ufasx"]
-[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="2_2g4x3"]
-
-[sub_resource type="Resource" id="Resource_3ei6y"]
-script = ExtResource("1_ufasx")
-type = "OR"
-state = false
-inputs = [0, 1]
-
-[sub_resource type="Resource" id="Resource_n4sel"]
-script = ExtResource("1_ufasx")
-type = "AND"
-state = false
-inputs = [0, 1]
-
-[sub_resource type="Resource" id="Resource_ld3s8"]
-script = ExtResource("1_ufasx")
-type = "NOT"
-state = false
-inputs = [SubResource("Resource_n4sel")]
-
-[sub_resource type="Resource" id="Resource_bcoxm"]
-script = ExtResource("1_ufasx")
-type = "AND"
-state = false
-inputs = [SubResource("Resource_3ei6y"), SubResource("Resource_ld3s8")]
+[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="1_spu7l"]
 
 [resource]
-script = ExtResource("2_2g4x3")
+script = ExtResource("1_spu7l")
 name = "XOR"
-color = Color(1, 0, 1, 1)
-gates = Array[ExtResource("1_ufasx")]([SubResource("Resource_3ei6y"), SubResource("Resource_n4sel"), SubResource("Resource_ld3s8"), SubResource("Resource_bcoxm")])
-inputs = 2
-outputs = [SubResource("Resource_bcoxm")]
+color = Color(1, 0.2, 0, 1)
+inputs = [[2, 0], [2, 0]]
+outputs = Array[int]([3])
+gateTypes = Array[String](["AND", "NOT", "OR", "AND"])
+gateEdges = [[0, 1], [1, 3], [2, 3]]

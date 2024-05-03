@@ -17,6 +17,7 @@ var selected: bool = false:
 var dragOffset: Vector2
 var outputs: Array[Node2D]
 var inputs: Array[Node2D]
+var node: graphNode
 
 func _ready() -> void:
 	#identify the area to drag
@@ -31,6 +32,12 @@ func _ready() -> void:
 			inputs.append(child)
 		elif child.name.substr(0, 6) == "output" and child.get_class() == "Node2D":
 			outputs.append(child)
+	
+	#create the graph node used for calculating states
+	node = graphNode.new()
+
+	#add the graph node to the graph
+	get_tree().get_root().get_node("root").componentGraph.nodes.append(node)
 	return
 
 func _process(_delta) -> void:
@@ -74,9 +81,16 @@ func _on_drag_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int)
 #handle the delete tool and generally deleting the component
 func delete() -> void:
 	var root: Node2D = get_tree().get_root().get_node("root")
+
+	#delete the gate if it is one
 	for i in range(root.gates.size()):
 		if root.gates[i] == self:
 			root.gates.remove_at(i)
+			break
+	
+	for i in range(root.pins.size()):
+		if root.pins[i] == self:
+			root.pins.remove_at(i)
 			break
 	
 	for i in range(root.chips.size()):

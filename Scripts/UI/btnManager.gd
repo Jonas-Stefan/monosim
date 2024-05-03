@@ -8,12 +8,12 @@ func _ready():
 	for file in dir.get_files():
 		var newBtn = Button.new()
 		newBtn.theme = load("res://UITheme.tres")
-		newBtn.set_script(load("res://Scripts/componentBtn.gd"))
+		newBtn.set_script(load("res://Scripts/UI/componentBtn.gd"))
 		newBtn.name = file.get_file().trim_suffix(".tres")
 		newBtn.text = file.get_file().trim_suffix(".tres")
 		add_child(newBtn)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

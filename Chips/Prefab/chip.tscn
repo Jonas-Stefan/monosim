@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://qlhdgmqqo81o"]
 
-[ext_resource type="Script" path="res://Scripts/chip.gd" id="1_jktam"]
+[ext_resource type="Script" path="res://Scripts/Components/chip.gd" id="1_jktam"]
 [ext_resource type="Texture2D" uid="uid://cm6pr0epubyad" path="res://Sprites/gate.png" id="2_7wfa0"]
 [ext_resource type="LabelSettings" uid="uid://bowtv2igofvn7" path="res://Fonts/nameFont.tres" id="3_eeaw8"]
 

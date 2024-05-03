@@ -1,13 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://nvs1nb4wtsa0"]
 
 [ext_resource type="Texture2D" uid="uid://cm6pr0epubyad" path="res://Sprites/gate.png" id="1_lhqfp"]
-[ext_resource type="Script" path="res://Scripts/lamp.gd" id="1_qbqin"]
+[ext_resource type="Script" path="res://Scripts/Components/lamp.gd" id="1_qbqin"]
 [ext_resource type="PackedScene" uid="uid://bm66f64gdvxcf" path="res://Scenes/input.tscn" id="2_ke6cl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mvay"]
 
 [node name="lamp" type="Node2D"]
 script = ExtResource("1_qbqin")
+type = "lamp"
 
 [node name="sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ch0ojc88ansrd"]
 
-[ext_resource type="Script" path="res://Scripts/logic.gd" id="1_pfpyv"]
-[ext_resource type="Script" path="res://Scripts/cam.gd" id="2_jcwwb"]
+[ext_resource type="Script" path="res://Scripts/GlobalLogic/logic.gd" id="1_pfpyv"]
+[ext_resource type="Script" path="res://Scripts/GlobalLogic/cam.gd" id="2_jcwwb"]
 [ext_resource type="PackedScene" uid="uid://b5w0247usukuj" path="res://Scenes/chip_creation_screen.tscn" id="4_hcrta"]
 [ext_resource type="PackedScene" uid="uid://cld0n4yche0pl" path="res://Scenes/ui.tscn" id="7_xsrpf"]
 

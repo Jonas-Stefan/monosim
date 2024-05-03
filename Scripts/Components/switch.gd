@@ -21,11 +21,10 @@ func _process(delta):
 func _on_drag_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 	super._on_drag_area_input_event(_viewport, event, _shape_idx)
 	if event.is_action_pressed("rClick"):
-		for output in outputs:
-			output.state = !output.state
-			if output.state:
-				sprite.modulate = highColor
-			else:
-				sprite.modulate = lowColor
+		node.state = !node.state
+		if node.state:
+			sprite.modulate = highColor
+		else:
+			sprite.modulate = lowColor
 
 	return

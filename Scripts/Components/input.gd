@@ -21,6 +21,39 @@ func _on_input_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int
 		connectedWire.delete()
 
 func connect_output(wire: Line2D) -> void:
+	#create a edge for the component graph
+	#check if the input belongs to a chip
+	var inputNode: graphNode
+	var outputNodes: Array[graphNode]
+
+	#My way of checking if the pin belongs to a chip is probably pretty bad, but I don't know how to do it better
+
+	if globals.selectedOutput.get_parent().get_script().resource_path == "res://Scripts/Components/chip.gd":
+		#the input of the edge is a chip
+		var chip: Node2D = globals.selectedOutput.get_parent()
+		var outputIndex = chip.outputs.find(globals.selectedOutput)
+		inputNode = chip.chipGraph.nodes[chip.chipResource.outputs[outputIndex]]
+	else:
+		#the input of the edge is a component
+		inputNode = globals.selectedOutput.get_parent().node
+	
+
+	if get_parent().get_script().resource_path == "res://Scripts/Components/chip.gd":
+		#the output of the edge is a chip
+		var chip: Node2D = get_parent()
+		var inputIndex = chip.inputs.find(self)
+		var inputIndices = chip.chipResource.inputs[inputIndex]
+		for index in inputIndices:
+			outputNodes.append(chip.chipGraph.nodes[index])
+	else:
+		#the output of the edge is a component
+		outputNodes.append(get_parent().node)
+
+	for outputNode in outputNodes:
+		var edge: graphEdge = graphEdge.new(inputNode, outputNode)
+		get_tree().get_root().get_node("root").componentGraph.edges.append(edge)
+		wire.edges.append(edge)
+
 	#logicially connect the output to the input
 	connectedOutput = globals.selectedOutput
 	globals.selectedOutput.connectedInputs.append(self)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d2504shnbpxp"]
 
-[ext_resource type="Script" path="res://Scripts/switch.gd" id="1_5b5uc"]
+[ext_resource type="Script" path="res://Scripts/Components/switch.gd" id="1_5b5uc"]
 [ext_resource type="Texture2D" uid="uid://cm6pr0epubyad" path="res://Sprites/gate.png" id="2_itr2y"]
 [ext_resource type="PackedScene" uid="uid://c46q0dw0jb7ye" path="res://Scenes/output.tscn" id="3_od8lu"]
 

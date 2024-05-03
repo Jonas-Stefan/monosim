@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c221ijkxrkbmp"]
 
-[ext_resource type="Script" path="res://Scripts/gate.gd" id="1_v27xy"]
+[ext_resource type="Script" path="res://Scripts/Components/gate.gd" id="1_v27xy"]
 [ext_resource type="Texture2D" uid="uid://cm6pr0epubyad" path="res://Sprites/gate.png" id="2_lgjwq"]
 [ext_resource type="LabelSettings" uid="uid://bowtv2igofvn7" path="res://Fonts/nameFont.tres" id="3_3fyl2"]
 [ext_resource type="PackedScene" uid="uid://bm66f64gdvxcf" path="res://Scenes/input.tscn" id="4_tu2do"]

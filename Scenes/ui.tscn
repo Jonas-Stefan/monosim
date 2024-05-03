@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cld0n4yche0pl"]
 
 [ext_resource type="Theme" uid="uid://drfn2y5u60xn2" path="res://UITheme.tres" id="1_c8xgw"]
-[ext_resource type="Script" path="res://Scripts/btnManager.gd" id="1_hxvkv"]
-[ext_resource type="Script" path="res://Scripts/componentBtn.gd" id="2_bq4jl"]
-[ext_resource type="Script" path="res://Scripts/toolBtn.gd" id="3_kbmjr"]
-[ext_resource type="Script" path="res://Scripts/showChipCreationBtn.gd" id="4_or8gs"]
+[ext_resource type="Script" path="res://Scripts/UI/btnManager.gd" id="1_hxvkv"]
+[ext_resource type="Script" path="res://Scripts/UI/componentBtn.gd" id="3_3yd5h"]
+[ext_resource type="Script" path="res://Scripts/UI/toolBtn.gd" id="3_kbmjr"]
+[ext_resource type="Script" path="res://Scripts/UI/showChipCreationBtn.gd" id="5_k1ij3"]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -53,7 +53,7 @@ mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "NOT
 "
-script = ExtResource("2_bq4jl")
+script = ExtResource("3_3yd5h")
 
 [node name="AND" type="Button" parent="topButtons/VBoxContainer/MarginContainer/btnContainer"]
 layout_mode = 2
@@ -61,21 +61,14 @@ mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "AND
 "
-script = ExtResource("2_bq4jl")
+script = ExtResource("3_3yd5h")
 
 [node name="OR" type="Button" parent="topButtons/VBoxContainer/MarginContainer/btnContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "OR"
-script = ExtResource("2_bq4jl")
-
-[node name="delay" type="Button" parent="topButtons/VBoxContainer/MarginContainer/btnContainer"]
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("1_c8xgw")
-text = "delay"
-script = ExtResource("2_bq4jl")
+script = ExtResource("3_3yd5h")
 
 [node name="switch" type="Button" parent="topButtons/VBoxContainer/MarginContainer/btnContainer"]
 layout_mode = 2
@@ -83,14 +76,14 @@ mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "switch
 "
-script = ExtResource("2_bq4jl")
+script = ExtResource("3_3yd5h")
 
 [node name="lamp" type="Button" parent="topButtons/VBoxContainer/MarginContainer/btnContainer"]
 layout_mode = 2
 mouse_filter = 1
 theme = ExtResource("1_c8xgw")
 text = "lamp"
-script = ExtResource("2_bq4jl")
+script = ExtResource("3_3yd5h")
 
 [node name="toolSelection" type="Control" parent="."]
 layout_mode = 3
@@ -169,4 +162,4 @@ size_flags_horizontal = 4
 theme = ExtResource("1_c8xgw")
 text = "create chip
 "
-script = ExtResource("4_or8gs")
+script = ExtResource("5_k1ij3")

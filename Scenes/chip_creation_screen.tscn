@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5w0247usukuj"]
 
-[ext_resource type="Script" path="res://Scripts/chipCreationUI.gd" id="1_qkunp"]
+[ext_resource type="Script" path="res://Scripts/UI/chipCreationUI.gd" id="1_57pkx"]
 [ext_resource type="Theme" uid="uid://drfn2y5u60xn2" path="res://UITheme.tres" id="1_rpq0n"]
-[ext_resource type="Script" path="res://Scripts/finishChipBtn.gd" id="3_mohq3"]
+[ext_resource type="Script" path="res://Scripts/UI/finishChipBtn.gd" id="3_mohq3"]
 
 [node name="chipCreationScreen" type="CanvasLayer"]
-script = ExtResource("1_qkunp")
+script = ExtResource("1_57pkx")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
