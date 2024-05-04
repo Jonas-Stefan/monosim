@@ -6,7 +6,7 @@ var gates: Array[Node2D] = []
 var pins: Array[Node2D] = []
 var chips: Array[Node2D] = []
 
-@export var tps: float = 10000.0
+@export var tps: float = 1000.0
 var simulationIsRunning: bool = true
 
 # Called when the node enters the scene tree for the first time.
@@ -33,6 +33,7 @@ func game_loop() -> void:
 	It works by setting their internal inputs array to the state of their input nodes and then updating them. This way, every node gets updated "at the same time" which is important for the simulation to work correctly.
 	"""
 	while simulationIsRunning:
+		var startTime: float = Time.get_ticks_usec()
 		#set all the input of the components to the state of the input
 		for edge in componentGraph.edges:
 			edge.output.inputs.append(edge.input.state)
@@ -51,7 +52,8 @@ func game_loop() -> void:
 			for componentNode in chip.chipGraph.nodes:
 				componentNode.update_state()
 		
-		await get_tree().create_timer(1.0 / tps).timeout
+		var opTime: float = Time.get_ticks_usec() - startTime
+		await get_tree().create_timer(max(0, (1.0 / tps) - opTime / 1_000_000)).timeout
 
 func visualize_wire(wire: Line2D) -> void:
 	#I couldn't think of a better name for this function, but it shows the next wire piece the user would add when pressing left click
