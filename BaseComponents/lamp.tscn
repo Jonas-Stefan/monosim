@@ -20,5 +20,5 @@ position = Vector2(-30, 0)
 [node name="dragArea" type="Area2D" parent="."]
 
 [node name="shape" type="CollisionShape2D" parent="dragArea"]
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_4mvay")

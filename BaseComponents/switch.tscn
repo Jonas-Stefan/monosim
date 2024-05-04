@@ -19,7 +19,7 @@ position = Vector2(30, 0)
 [node name="inputArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="inputArea"]
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_mcq7t")
 
 [connection signal="input_event" from="inputArea" to="." method="_on_input_area_input_event"]

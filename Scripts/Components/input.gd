@@ -24,7 +24,7 @@ func connect_output(wire: Line2D) -> void:
 	#create a edge for the component graph
 	#check if the input belongs to a chip
 	var inputNode: graphNode
-	var outputNodes: Array[graphNode]
+	var outputNodes: Array[graphNode] = []
 
 	#My way of checking if the pin belongs to a chip is probably pretty bad, but I don't know how to do it better
 
@@ -65,4 +65,6 @@ func connect_output(wire: Line2D) -> void:
 	connectedWire = wire
 
 	#finish the connection process
+	#waiting for a short time isn't the cleanest solution, but everything else would probably be unnecessarily complicated
+	await get_tree().create_timer(0.1, false).timeout
 	globals.selectedOutput = null

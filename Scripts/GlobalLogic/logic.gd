@@ -6,16 +6,15 @@ var gates: Array[Node2D] = []
 var pins: Array[Node2D] = []
 var chips: Array[Node2D] = []
 
-
-@export var tps: int = 1000
+@export var tps: float = 10000.0
 var simulationIsRunning: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#set the input to not accumulate input (some stuff would break otherwise)
 	Input.set_use_accumulated_input(false)
+	Engine.max_fps = 0
 	
-	#start the game loop
 	game_loop()
 
 
@@ -81,7 +80,8 @@ func add_wire_point(wire: Line2D) -> void:
 	params.collide_with_areas = true
 	params.collide_with_bodies = false
 	for dict in space.intersect_point(params):
-		if dict["collider"].get_parent().name.substr(0, 6) == "output" or dict["collider"].get_parent().name.substr(0, 5) == "input":
+		#I really need to find a better solution, this is just ugly
+		if dict["collider"].get_parent().get_script().resource_path == "res://Scripts/Components/output.gd" or dict["collider"].get_parent().get_script().resource_path == "res://Scripts/Components/input.gd":
 			return
 
 	#detect if the user wants to add a new point to the line

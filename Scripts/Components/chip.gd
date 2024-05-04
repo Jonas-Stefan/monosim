@@ -27,8 +27,6 @@ func _process(delta):
 	super._process(delta)
 
 func update_chip_resource() -> void:
-
-
 	#turn the information stored in the chipResource into a graph
 	var graphNodes: Array[graphNode] = []
 	var graphEdges: Array[graphEdge] = []
@@ -60,13 +58,15 @@ func update_chip_resource() -> void:
 	#change the appearance of the chip according to the chipResource
 	$Label.text = chipResource.name
 	$body.scale.y = max(0.2, max(chipResource.inputs.size() * 0.067, chipResource.outputs.size() * 0.067))
-	var chipWidth: int = $Label.size.x + 40
+
+	var chipWidth: float = $Label.size.x + 40
 	chipWidth /= 2
 	chipWidth = globals.snap_to_grid(Vector2(chipWidth, 0)).x
 	#I will have to change it
 	chipWidth *= 2
-	$body.scale.x = max(0.2, chipWidth / 600.0)
+	$body.scale.x = max(0.2, chipWidth / 600)
 	$body.modulate = chipResource.color
+	$dragArea/shape.scale = $body.scale * 30
 
 	
 
@@ -87,7 +87,7 @@ func update_chip_resource() -> void:
 
 	for i in range(chipResource.inputs.size()):
 		var input: Node2D = load("res://Scenes/input.tscn").instantiate()
-		input.position = Vector2(-chipWidth / 2.0 - 10, topPosY + i * 40)
+		input.position = Vector2(-chipWidth / 2.0, topPosY + i * 40)
 		inputs.append(input)
 		self.add_child(input)
 	
@@ -105,6 +105,6 @@ func update_chip_resource() -> void:
 
 	for i in range(chipResource.outputs.size()):
 		var output: Node2D = load("res://Scenes/output.tscn").instantiate()
-		output.position = Vector2(chipWidth / 2.0 + 10, topPosY + i * 40)
+		output.position = Vector2(chipWidth / 2.0, topPosY + i * 40)
 		outputs.append(output)
 		self.add_child(output)

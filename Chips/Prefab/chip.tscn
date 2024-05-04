@@ -31,5 +31,5 @@ horizontal_alignment = 1
 [node name="dragArea" type="Area2D" parent="."]
 
 [node name="shape" type="CollisionShape2D" parent="dragArea"]
-scale = Vector2(5, 5)
+scale = Vector2(6, 6)
 shape = SubResource("RectangleShape2D_04il3")

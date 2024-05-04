@@ -4,6 +4,7 @@ class_name globals
 enum tools {MOVE, DELETE, EDIT}
 
 static var selectedOutput: Node2D = null
+static var nodeSelected: bool = false
 static var tool: tools = tools.MOVE
 
 static var gridSize: int  = 10
