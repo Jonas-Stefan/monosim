@@ -1,6 +1,6 @@
 extends componentBase
 
-var chipGraph: graph
+var chipGraph
 
 @export var chipResource: chipBase:
 	set(value):
@@ -21,29 +21,42 @@ func _ready():
 		outputs.remove_at(0)
 	
 	update_chip_resource()
-	get_tree().get_root().get_node("root").chips.append(self)
+	SimEngine.AddChipGraph(chipGraph)
+
+	#remove the unneeded node that got added by componentBase
+	SimEngine.mainGraph.RemoveNode(node)
 
 func _process(delta):
 	super._process(delta)
 
+func delete():
+	#override the delete function to remove the chipGraph from the simulation
+	SimEngine.RemoveChipGraph(chipGraph)
+	super.delete()
+
 func update_chip_resource() -> void:
 	#turn the information stored in the chipResource into a graph
-	var graphNodes: Array[graphNode] = []
-	var graphEdges: Array[graphEdge] = []
+	var graphNodes: Array = []
+	var graphEdges: Array = []
 
 	for type in chipResource.gateTypes:
-		var newNode: graphNode = graphNode.new(type)
+		var newNode = globals.graphNode.new()
+		newNode.type = type
 		graphNodes.append(newNode)
 	
 	for edge in chipResource.gateEdges:
-		var input: graphNode = graphNodes[edge[0]]
-		var output: graphNode = graphNodes[edge[1]]
-		var newEdge: graphEdge = graphEdge.new(input, output)
+		var newEdge = globals.graphEdge.new()
+		newEdge.input = graphNodes[edge[0]]
+		newEdge.output = graphNodes[edge[1]]
 		graphEdges.append(newEdge)
 
-	chipGraph = graph.new(graphNodes, graphEdges)
+	chipGraph = globals.graph.new()
 
-
+	for _node in graphNodes:
+		chipGraph.AddGraphNode(_node)
+	
+	for _edge in graphEdges:
+		chipGraph.AddGraphEdge(_edge)
 
 	#reset the inputs and outputs
 	for i in range(inputs.size()):
@@ -52,7 +65,6 @@ func update_chip_resource() -> void:
 	for i in range(outputs.size()):
 		outputs[i].queue_free()
 		outputs.remove_at(i)
-
 
 
 	#change the appearance of the chip according to the chipResource

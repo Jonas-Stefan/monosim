@@ -2,7 +2,7 @@ extends Line2D
 
 var wireAreas: Array[Area2D] = []
 var areaWidth: int = 8
-var edges: Array[graphEdge] = []
+var edges: Array = []
 var lowColor: Color = Color(0.5, 0.5, 0.5)
 var highColor: Color = Color(0.8, 0.1, 0.1)
 
@@ -87,12 +87,9 @@ func get_wire_point_count() -> int:
 func delete() -> void:
 	var index: int = -1
 	var parent: Node2D = get_parent().get_parent()
-	var root: Node2D = get_tree().get_root().get_node("root")
 
 	for edge in edges:
-		var edgeIndex = root.componentGraph.edges.find(edge)
-		if edgeIndex != -1:
-			root.componentGraph.edges.remove_at(edgeIndex)
+		SimEngine.mainGraph.RemoveEdge(edge)
 
 	#find the index of the wire in the parent
 	for i in range(parent.wires.size()):

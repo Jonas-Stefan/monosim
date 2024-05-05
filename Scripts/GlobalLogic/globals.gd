@@ -6,6 +6,9 @@ enum tools {MOVE, DELETE, EDIT}
 static var selectedOutput: Node2D = null
 static var nodeSelected: bool = false
 static var tool: tools = tools.MOVE
+static var graph: CSharpScript = load("res://Scripts/Graph/Graph.cs")
+static var graphNode: CSharpScript = load("res://Scripts/Graph/GraphNode.cs")
+static var graphEdge: CSharpScript = load("res://Scripts/Graph/GraphEdge.cs")
 
 static var gridSize: int  = 10
 

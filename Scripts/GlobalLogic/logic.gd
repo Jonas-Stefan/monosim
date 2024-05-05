@@ -1,10 +1,8 @@
 extends Node2D
 
 #the graph data structure, that holds all the components (nodes) and wires (edges)
-var componentGraph: graph = graph.new()
 var gates: Array[Node2D] = []
 var pins: Array[Node2D] = []
-var chips: Array[Node2D] = []
 
 @export var tps: float = 1000.0
 var simulationIsRunning: bool = true
@@ -14,8 +12,7 @@ func _ready() -> void:
 	#set the input to not accumulate input (some stuff would break otherwise)
 	Input.set_use_accumulated_input(false)
 	Engine.max_fps = 0
-	
-	game_loop()
+	SimEngine.Start()
 
 
 func _process(_delta) -> void:
@@ -26,34 +23,6 @@ func _process(_delta) -> void:
 		var wire: Line2D = selectedWires[selectedWires.size() - 1]
 		#visualize the wire by updating the last point to the mouse position
 		visualize_wire(wire)
-
-func game_loop() -> void:
-	"""
-	The game loop is the main loop of the simulation. It updates all the components in the main graph every tick.
-	It works by setting their internal inputs array to the state of their input nodes and then updating them. This way, every node gets updated "at the same time" which is important for the simulation to work correctly.
-	"""
-	while simulationIsRunning:
-		var startTime: float = Time.get_ticks_usec()
-		#set all the input of the components to the state of the input
-		for edge in componentGraph.edges:
-			edge.output.inputs.append(edge.input.state)
-		
-		#repeat this for every chip
-		for chip in chips:
-			for edge in chip.chipGraph.edges:
-				edge.output.inputs.append(edge.input.state)
-		
-		#set the state of the components
-		for componentNode in componentGraph.nodes:
-			componentNode.update_state()
-		
-		#set the state of the components in the chips
-		for chip in chips:
-			for componentNode in chip.chipGraph.nodes:
-				componentNode.update_state()
-		
-		var opTime: float = Time.get_ticks_usec() - startTime
-		await get_tree().create_timer(max(0, (1.0 / tps) - opTime / 1_000_000)).timeout
 
 func visualize_wire(wire: Line2D) -> void:
 	#I couldn't think of a better name for this function, but it shows the next wire piece the user would add when pressing left click

@@ -17,7 +17,7 @@ var selected: bool = false:
 var dragOffset: Vector2
 var outputs: Array[Node2D]
 var inputs: Array[Node2D]
-var node: graphNode
+var node
 
 func _ready() -> void:
 	#identify the area to drag
@@ -34,10 +34,10 @@ func _ready() -> void:
 			outputs.append(child)
 	
 	#create the graph node used for calculating states
-	node = graphNode.new()
+	node = globals.graphNode.new()
 
 	#add the graph node to the graph
-	get_tree().get_root().get_node("root").componentGraph.nodes.append(node)
+	SimEngine.mainGraph.AddGraphNode(node)
 	return
 
 func _process(_delta) -> void:
@@ -88,24 +88,25 @@ func delete() -> void:
 			root.gates.remove_at(i)
 			break
 	
+	#delete the pin if it is one
 	for i in range(root.pins.size()):
 		if root.pins[i] == self:
 			root.pins.remove_at(i)
 			break
-	
-	for i in range(root.chips.size()):
-		if root.chips[i] == self:
-			root.chips.remove_at(i)
-			break
 
+	#delete all the outgoing wires
 	for output in outputs:
 		for wire in output.wires:
 			wire.delete()
 	
+	#delete all the incoming wires
 	for input in inputs:
 		if input.connectedOutput != null:
 			input.connectedWire.delete()
 	
+	#delete the node from the main graph
+	SimEngine.mainGraph.RemoveNode(node)
+
 	queue_free()
 
 #handles the move tool
