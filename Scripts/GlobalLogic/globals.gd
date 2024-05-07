@@ -13,7 +13,7 @@ static var graphEdge: CSharpScript = load("res://Scripts/Graph/GraphEdge.cs")
 static var gridSize: int  = 10
 
 static func snap_to_grid(pos: Vector2) -> Vector2:
-    var snappedVector: Vector2 = Vector2()
-    snappedVector.x = round(pos.x / gridSize) * gridSize
-    snappedVector.y = round(pos.y / gridSize) * gridSize
-    return snappedVector
+	var snappedVector: Vector2 = Vector2()
+	snappedVector.x = round(pos.x / gridSize) * gridSize
+	snappedVector.y = round(pos.y / gridSize) * gridSize
+	return snappedVector

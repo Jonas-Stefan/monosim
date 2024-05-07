@@ -1,7 +1,7 @@
 using Godot;
 
-public partial class GraphEdge: Resource
+public partial class GraphEdge: Node
 {
-    public GraphNode input;
-    public GraphNode output;
+	public GraphNode input;
+	public GraphNode output;
 }

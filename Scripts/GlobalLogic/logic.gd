@@ -3,6 +3,7 @@ extends Node2D
 #the graph data structure, that holds all the components (nodes) and wires (edges)
 var gates: Array[Node2D] = []
 var pins: Array[Node2D] = []
+var chips: Array[Node2D] = []
 
 @export var tps: float = 1000.0
 var simulationIsRunning: bool = true

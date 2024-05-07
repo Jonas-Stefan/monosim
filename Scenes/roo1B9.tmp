@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch0ojc88ansrd"]
+
+[ext_resource type="Script" path="res://Scripts/GlobalLogic/logic.gd" id="1_pfpyv"]
+[ext_resource type="Script" path="res://Scripts/GlobalLogic/cam.gd" id="2_jcwwb"]
+[ext_resource type="PackedScene" uid="uid://b5w0247usukuj" path="res://Scenes/chip_creation_screen.tscn" id="4_hcrta"]
+[ext_resource type="PackedScene" uid="uid://cld0n4yche0pl" path="res://Scenes/ui.tscn" id="7_xsrpf"]
+
+[node name="root" type="Node2D"]
+script = ExtResource("1_pfpyv")
+
+[node name="cam" type="Camera2D" parent="."]
+script = ExtResource("2_jcwwb")
+
+[node name="gates" type="Node2D" parent="."]
+
+[node name="pins" type="Node2D" parent="."]
+
+[node name="chips" type="Node2D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("7_xsrpf")]
+
+[node name="chipCreationScreen" parent="." instance=ExtResource("4_hcrta")]

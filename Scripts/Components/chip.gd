@@ -25,6 +25,7 @@ func _ready():
 
 	#remove the unneeded node that got added by componentBase
 	SimEngine.mainGraph.RemoveNode(node)
+	get_tree().get_root().get_node("root").chips.append(self)
 
 func _process(delta):
 	super._process(delta)
