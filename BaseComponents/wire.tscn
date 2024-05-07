@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://cfvtblnjo1mfk"]
 
-[ext_resource type="Script" path="res://Scripts/wire.gd" id="1_svd2x"]
+[ext_resource type="Script" path="res://Scripts/Components/wire.gd" id="1_svd2x"]
 
 [node name="wire" type="Line2D"]
+z_index = 1
 width = 8.0
 joint_mode = 2
 begin_cap_mode = 2

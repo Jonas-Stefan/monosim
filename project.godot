@@ -12,17 +12,22 @@ config_version=5
 
 config/name="monosim"
 run/main_scene="res://Scenes/root.tscn"
-config/features=PackedStringArray("4.2", "Mobile")
+config/features=PackedStringArray("4.2", "C#", "Mobile")
 config/icon="res://Sprites/icon.png"
 
 [autoload]
 
-Globals="*res://Scripts/globals.gd"
+Globals="*res://Scripts/GlobalLogic/globals.gd"
+SimEngine="*res://Scripts/GlobalLogic/SimEngine.cs"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[dotnet]
+
+project/assembly_name="monosim"
 
 [editor]
 

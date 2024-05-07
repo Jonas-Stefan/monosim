@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c46q0dw0jb7ye"]
 
 [ext_resource type="Texture2D" uid="uid://bmx4k11xrcdgc" path="res://Sprites/IO.png" id="1_qgth5"]
-[ext_resource type="Script" path="res://Scripts/output.gd" id="1_tv7er"]
+[ext_resource type="Script" path="res://Scripts/Components/output.gd" id="1_tv7er"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_skx0h"]
 
@@ -18,7 +18,6 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="shape" type="CollisionShape2D" parent="outputArea"]
-scale = Vector2(0.8, 0.8)
 shape = SubResource("CircleShape2D_skx0h")
 
 [node name="wires" type="Node2D" parent="."]

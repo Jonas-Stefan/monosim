@@ -1,10 +1,12 @@
 extends Button
 
-# Called when the node enters the scene tree for the first time.
+#this is used to change the tool when the buttons are clicked
+
 func _ready():
 	self.button_down.connect(_on_button_down)
 
 func _on_button_down():
+	#deselect all gates and check which button was clicked
 	var root: Node2D = get_tree().get_root().get_node("root")
 	for gate in root.gates:
 		gate.selected = false
@@ -13,6 +15,4 @@ func _on_button_down():
 		globals.tool = globals.tools.MOVE
 	elif self.name == "delete":
 		globals.tool = globals.tools.DELETE
-	elif self.name == "edit":
-		globals.tool = globals.tools.EDIT
 	
