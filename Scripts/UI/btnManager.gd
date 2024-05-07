@@ -1,7 +1,7 @@
 extends HBoxContainer
 
+#This just exists to load in all the chips on startup
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	#load in all the chips
 	var dir = DirAccess.open("res://Chips/Chips")
@@ -12,8 +12,3 @@ func _ready():
 		newBtn.name = file.get_file().trim_suffix(".tres")
 		newBtn.text = file.get_file().trim_suffix(".tres")
 		add_child(newBtn)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass

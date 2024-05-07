@@ -24,6 +24,10 @@ public partial class Graph: Node
 		}
 	}
 
+	/*
+	Some methods that are meant for GDscript.
+	*/
+
 	public void AddGraphNode(GraphNode node){
 		nodes.Add(node);
 	}

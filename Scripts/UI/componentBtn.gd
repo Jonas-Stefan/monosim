@@ -2,15 +2,13 @@ extends Button
 
 var root: Node2D
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	self.button_down.connect(_on_button_down)
 	
 	root = get_tree().get_root().get_node("root")
 
-	
-
 func _on_button_down():
+	#detect which button was pressed and add the corresponding component to the project
 	if self.name == "NOT":
 		var newGate: Node2D = load("res://BaseComponents/not.tscn").instantiate()
 		add_gate(newGate)
@@ -34,6 +32,7 @@ func _on_button_down():
 		return
 
 func add_gate(newGate: Node2D) -> void:
+	#add a gate to the project
 	reset_tool()
 
 	var gates: Node2D = root.get_node("gates")
@@ -42,6 +41,7 @@ func add_gate(newGate: Node2D) -> void:
 	root.gates.append(newGate)
 
 func add_pin(pin: Node2D) -> void:
+	#add an input/output to the project
 	reset_tool()
 
 	var pins: Node2D = root.get_node("pins")
@@ -51,6 +51,7 @@ func add_pin(pin: Node2D) -> void:
 	return
 
 func add_chip(chipName: String) -> void:
+	#add a chip to the project
 	reset_tool()
 	
 	var chips: Node2D = root.get_node("chips")
@@ -62,5 +63,6 @@ func add_chip(chipName: String) -> void:
 	return
 
 func reset_tool() -> void:
+	#reset the tool to the move tool
 	globals.tool = globals.tools.MOVE
 	return

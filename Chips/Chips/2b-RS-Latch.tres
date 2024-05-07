@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="chipBase" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Chips/Resource/chipBase.gd" id="1_kl1ab"]
+
+[resource]
+script = ExtResource("1_kl1ab")
+name = "2b-RS-Latch"
+color = Color(1, 0, 1, 1)
+inputs = [[0], [1], [3], [4]]
+outputs = Array[int]([2, 5])
+gateTypes = Array[String](["OR", "NOT", "AND", "OR", "NOT", "AND"])
+gateEdges = [[0, 2], [1, 2], [2, 0], [3, 5], [4, 5], [5, 3]]

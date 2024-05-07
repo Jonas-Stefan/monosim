@@ -1,6 +1,6 @@
 extends Node2D
 
-#the graph data structure, that holds all the components (nodes) and wires (edges)
+#The arrays containing all of the components, used for stuff like chip creation
 var gates: Array[Node2D] = []
 var pins: Array[Node2D] = []
 var chips: Array[Node2D] = []
@@ -12,11 +12,24 @@ var simulationIsRunning: bool = true
 func _ready() -> void:
 	#set the input to not accumulate input (some stuff would break otherwise)
 	Input.set_use_accumulated_input(false)
-	Engine.max_fps = 0
+
+	#start the simulation engine
 	SimEngine.Start()
 
+func _input(event: InputEvent) -> void:
+	#deal with inputs regarding the wire, that is currently being added, if there is one
+	if globals.selectedOutput != null:
+		var selectedWires: Array[Line2D] = globals.selectedOutput.wires
+		var wire: Line2D = selectedWires[selectedWires.size() - 1]
+
+		if event.is_action_pressed("lClick"):
+			add_wire_point(wire)
+		
+		if event.is_action_pressed("rClick"):
+			wire.remove_wire_point(wire.get_wire_point_count() - 1)
 
 func _process(_delta) -> void:
+	#visualize the wire the user is currently adding
 	if globals.selectedOutput != null:
 		if globals.selectedOutput.wires.size() == 0:
 			return
@@ -58,14 +71,3 @@ func add_wire_point(wire: Line2D) -> void:
 
 	#detect if the user wants to add a new point to the line
 	wire.add_wire_point(get_global_mouse_position() - globals.selectedOutput.get_global_position())
-
-func _input(event: InputEvent) -> void:
-	if globals.selectedOutput != null:
-		var selectedWires: Array[Line2D] = globals.selectedOutput.wires
-		var wire: Line2D = selectedWires[selectedWires.size() - 1]
-
-		if event.is_action_pressed("lClick"):
-			add_wire_point(wire)
-		
-		if event.is_action_pressed("rClick"):
-			wire.remove_wire_point(wire.get_wire_point_count() - 1)

@@ -5,9 +5,12 @@ var nameField: LineEdit
 var colorBtn: ColorPickerButton
 
 func _ready():
+	#gets some variables ready
 	nameField = get_parent().get_node("nameField")
 	colorBtn = get_parent().get_node("colorBtn")
 	self.pressed.connect(_on_finish_chip_btn_pressed)
+
+
 func _on_finish_chip_btn_pressed():
 	create_new_chip()
 
@@ -34,7 +37,7 @@ func create_new_chip() -> void:
 			oldGateNodes.append(node)
 
 	for chipGraph in chipGraphs:
-		for node in chipGraph.nodes:
+		for node in chipGraph.GetNodes():
 			oldGateNodes.append(node)
 
 	var gateEdges: Array = []
@@ -88,6 +91,8 @@ func create_new_chip() -> void:
 			#append the new counterpart of the old node to the outputs
 			outputs.append(oldGateNodes.find(connectedOldNode))
 
+
+	#set the variables of the new chip	
 	chipResource.name = nameField.text
 	chipResource.color = colorBtn.color
 	chipResource.inputs = inputs
@@ -103,7 +108,6 @@ func create_new_chip() -> void:
 	root.get_node("chipCreationScreen").hide()
 
 	#add the chip to the top buttons
-	#I will do it later :)
 	var UInode = root.get_node("UI")
 	var btnContainer = UInode.get_node("topButtons/VBoxContainer/MarginContainer/btnContainer")
 	var newBtn = Button.new()
@@ -113,5 +117,8 @@ func create_new_chip() -> void:
 	newBtn.text = chipResource.name
 	btnContainer.add_child(newBtn)
 
+
+
 func sort_by_y_pos(a: Node2D, b: Node2D) -> bool:
+	#used to sort the switches and lamps to organize the pins of the chip
 	return a.position.y < b.position.y

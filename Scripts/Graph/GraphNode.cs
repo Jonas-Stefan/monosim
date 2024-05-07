@@ -14,6 +14,8 @@ public partial class GraphNode: Node
 	}
 
 	public void UpdateState(){
+		//Update the state of the node based on the inputs
+
 		if(type == "AND"){
 			FillInputs(2);
 			state = inputs[0] && inputs[1];
@@ -32,6 +34,7 @@ public partial class GraphNode: Node
 	}
 
 	public void FillInputs(int inputCount){
+		//Fill the inputs list with false if there aren't enough (For instance if only one wire leads to an AND gate, the other input will be set false)
 		for(int i = inputs.Count; i < inputCount; i++){
 			inputs.Add(false);
 		}

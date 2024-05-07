@@ -1,11 +1,3 @@
 extends CanvasLayer
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	visible = false
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+#I actually don't know why this script exists, but it could be used to make the chip creation more fancy, so I will keep it for now

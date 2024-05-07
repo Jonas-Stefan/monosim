@@ -124,12 +124,6 @@ text = "delete
 "
 script = ExtResource("3_kbmjr")
 
-[node name="edit" type="Button" parent="toolSelection/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("1_c8xgw")
-text = "edit"
-script = ExtResource("3_kbmjr")
-
 [node name="chipCreation" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 3

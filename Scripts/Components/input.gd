@@ -4,6 +4,8 @@ var connectedOutput: Node2D = null
 var connectedWire: Line2D
 
 func _on_input_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int) -> void:
+	#handle the inputs of the input
+
 	if event.is_action_pressed("lClick") and connectedOutput == null and globals.selectedOutput != null:
 		#connect the output to the input if the user actually wants to connect them
 		var wires: Array[Line2D] = globals.selectedOutput.wires
@@ -18,6 +20,7 @@ func _on_input_area_input_event(_viewport:Node, event:InputEvent, _shape_idx:int
 			connect_output(wire)
 		
 	elif event.is_action_pressed("rClick") and connectedOutput != null:
+		#delete the wire in case of a right click
 		connectedWire.delete()
 
 func connect_output(wire: Line2D) -> void:
@@ -28,6 +31,7 @@ func connect_output(wire: Line2D) -> void:
 
 	#My way of checking if the pin belongs to a chip is probably pretty bad, but I don't know how to do it better
 
+	#set the input node
 	if globals.selectedOutput.get_parent().get_script().resource_path == "res://Scripts/Components/chip.gd":
 		#the input of the edge is a chip
 		var chip: Node2D = globals.selectedOutput.get_parent()
@@ -37,7 +41,7 @@ func connect_output(wire: Line2D) -> void:
 		#the input of the edge is a component
 		inputNode = globals.selectedOutput.get_parent().node
 	
-
+	#set the output node
 	if get_parent().get_script().resource_path == "res://Scripts/Components/chip.gd":
 		#the output of the edge is a chip
 		var chip: Node2D = get_parent()
@@ -49,6 +53,7 @@ func connect_output(wire: Line2D) -> void:
 		#the output of the edge is a component
 		outputNodes.append(get_parent().node)
 
+	#I have to do this in a loop, because the output could be a chip, which has multiple gates connected to a single input
 	for outputNode in outputNodes:
 		var edge = globals.graphEdge.new()
 		edge.input = inputNode
@@ -60,13 +65,14 @@ func connect_output(wire: Line2D) -> void:
 	connectedOutput = globals.selectedOutput
 	globals.selectedOutput.connectedInputs.append(self)
 
-	#correctly place the last point of the wire
-	wire.set_wire_point_position(wire.get_wire_point_count() - 1, global_position - globals.selectedOutput.global_position)
-
 	#append the wire to the connectedWires array, so I can acces it later
 	connectedWire = wire
 
 	#finish the connection process
-	#waiting for a short time isn't the cleanest solution, but everything else would probably be unnecessarily complicated
+	#waiting for a short time isn't the cleanest solution, but everything else would probably be unnecessarily complicated. Otherwise the wire would behave in an unpredictable way.
 	await get_tree().create_timer(0.1, false).timeout
+
+	#correctly place the last point of the wire
+	wire.set_wire_point_position(wire.get_wire_point_count() - 1, global_position - globals.selectedOutput.global_position)
+
 	globals.selectedOutput = null
